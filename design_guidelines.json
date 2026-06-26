@@ -1,0 +1,135 @@
+{
+  "project_name": "JhaPay Merchant App",
+  "theme": "Light",
+  "archetype": "Organic & Earthy / Premium Fintech",
+  "design_language": "Ultra clean, minimal, highly rounded, premium fintech, one-hand usability, zero clutter.",
+  "colors": {
+    "primary": "#18B76A",
+    "secondary_green": "#22C55E",
+    "light_green": "#DDF8EA",
+    "success": "#16A34A",
+    "warning": "#F59E0B",
+    "danger": "#EF4444",
+    "background": "#F8FAF8",
+    "cards": "#FFFFFF",
+    "text_primary": "#111827",
+    "text_secondary": "#6B7280",
+    "divider": "#E9ECEF",
+    "icons": "#4B5563"
+  },
+  "forbidden_colors": [
+    "purple",
+    "#9D4CDD",
+    "#7351B7"
+  ],
+  "typography": {
+    "font_family": "SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif",
+    "headings": {
+      "style": "tracking-tight, large titles, bold amount numbers",
+      "h1": "text-4xl sm:text-5xl font-bold tracking-tight text-[#111827]",
+      "h2": "text-3xl font-bold tracking-tight text-[#111827]",
+      "h3": "text-2xl font-semibold tracking-tight text-[#111827]",
+      "h4": "text-xl font-semibold tracking-tight text-[#111827]"
+    },
+    "body": {
+      "primary": "text-base text-[#111827]",
+      "secondary": "text-sm text-[#6B7280]",
+      "tertiary": "text-xs text-[#6B7280]"
+    }
+  },
+  "border_radius": {
+    "cards": "rounded-[24px]",
+    "buttons": "rounded-[18px]",
+    "inputs": "rounded-[16px]",
+    "bottom_sheet": "rounded-t-[32px]",
+    "dialogs": "rounded-[28px]",
+    "floating_cards": "rounded-[26px]",
+    "bottom_navigation": "rounded-[34px]",
+    "fabs": "rounded-full",
+    "general_softness": "Everything should feel soft. Nothing should have sharp corners."
+  },
+  "shadows_and_surfaces": {
+    "apple_soft_shadow": "shadow-[0_4px_20px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)]",
+    "floating_card_shadow": "shadow-[0_8px_30px_rgba(0,0,0,0.08)]",
+    "glassmorphism": "backdrop-blur-xl bg-white/70 border border-white/40",
+    "glassmorphism_usage": ["Header", "Floating Search", "Bottom Navigation", "Profile Header", "Bottom Sheets"]
+  },
+  "motion": {
+    "button_press": "transition-transform duration-120 active:scale-[0.98]",
+    "screen_transition": "animate-in fade-in zoom-in-95 duration-250 ease-out",
+    "cards": "hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-200",
+    "bottom_sheet": "animate-in slide-in-from-bottom duration-300 ease-out",
+    "micro_animations": ["Payment Success confetti", "Loading skeletons"]
+  },
+  "icons": {
+    "library": "lucide-react",
+    "style": "Rounded outline icons, SF Symbols style. No filled heavy icons.",
+    "color": "#4B5563"
+  },
+  "layout": {
+    "spacing": "Generous white space, highly spaced elements (p-6, p-8).",
+    "structure": "Mobile-first, single column. Frame as a phone on desktop.",
+    "touch_targets": "Very large, minimum 48x48px for all interactive elements.",
+    "bottom_navigation": {
+      "tabs": ["Home", "Collect", "Orders", "Activity", "More"],
+      "style": "Floating, rounded-[34px], glass effect, active tab highlighted."
+    }
+  },
+  "key_screens": {
+    "dashboard": "Large greeting, Merchant name, Today's sales, Wallet balance, Pending settlements, Recent activity, Quick actions, Beautiful analytics cards. Stacked modular cards.",
+    "pos_screen": "Large amount display, Beautiful numeric keypad, Recent Items, Quick Products, Customer, Notes, Discount, Tax, Tip, Collect Button. Very large touch targets.",
+    "transactions": "Apple Wallet inspired. Swipeable floating cards, expandable details.",
+    "orders": "Large Order Cards, Status Chips, Preparation Progress.",
+    "more_screen": "iOS Settings style grouped cards (Business Profile, Employees, Devices, etc.).",
+    "ai_assistant": "Floating green glowing orb. Opens chat bottom sheet with merchant Q&A.",
+    "success_screen": "Large Green Tick, Gradient Background, Confetti, Transaction ID."
+  },
+  "components": {
+    "avoid": [
+      "Material Design components",
+      "Sharp corners",
+      "Heavy gradients",
+      "Enterprise ERP tables",
+      "Dense layouts",
+      "Tiny buttons",
+      "Small touch targets",
+      "Complex navigation"
+    ]
+  },
+  "media": {
+    "image_urls": [
+      {
+        "url": "https://images.unsplash.com/photo-1753351052363-53ce102830eb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwyfHxoYXBweSUyMGNhZmUlMjBtZXJjaGFudCUyMHBvcnRyYWl0fGVufDB8fHx8MTc4MjQ5NDc0NXww&ixlib=rb-4.1.0&q=85",
+        "category": "merchant_avatar",
+        "description": "Smiling cafe merchant woman for dashboard greeting."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1740512376474-f34f5c8d542a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGNhZmUlMjBtZXJjaGFudCUyMHBvcnRyYWl0fGVufDB8fHx8MTc4MjQ5NDc0NXww&ixlib=rb-4.1.0&q=85",
+        "category": "employee_avatar",
+        "description": "Male employee avatar."
+      },
+      {
+        "url": "https://images.pexels.com/photos/29918625/pexels-photo-29918625.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "category": "product_image",
+        "description": "Assorted breakfast pastries and coffee cups for POS quick products."
+      },
+      {
+        "url": "https://images.pexels.com/photos/27700209/pexels-photo-27700209.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "category": "customer_avatar",
+        "description": "Happy customer avatar for orders/transactions."
+      }
+    ]
+  },
+  "testing": {
+    "attributes": "All interactive and key informational elements MUST include a data-testid attribute in kebab-case."
+  },
+  "instructions_to_main_agent": [
+    "Ensure all components use the EXACT hex codes specified.",
+    "Apply custom border radius variables (e.g. `rounded-[24px]`) as defined above instead of standard tailwind radii.",
+    "Implement glassmorphism for Header, Navigation, and Bottom Sheets using `backdrop-blur-xl bg-white/70`.",
+    "Use `lucide-react` with thin/outline strokes mimicking SF Symbols.",
+    "Build a mobile-first app layout; restrict max-width to mobile sizes (e.g., max-w-md mx-auto) with a subtle shadow and border to mimic a phone screen on desktop.",
+    "NEVER use placeholder text for images. Use the provided media URLs.",
+    "Use framer-motion or tailwind animate-in classes for the required soft transitions."
+  ]
+}
