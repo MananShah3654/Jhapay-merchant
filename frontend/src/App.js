@@ -13,6 +13,10 @@ import ActivityPage from "@/pages/ActivityPage";
 import DevicesPage from "@/pages/DevicesPage";
 import AlertsPage from "@/pages/AlertsPage";
 import MorePage from "@/pages/MorePage";
+import CustomersPage from "@/pages/CustomersPage";
+import InventoryPage from "@/pages/InventoryPage";
+import ReportsPage from "@/pages/ReportsPage";
+import PayoutsPage from "@/pages/PayoutsPage";
 
 function StageBg() {
   useEffect(() => {
@@ -37,6 +41,10 @@ function Shell() {
           <Route path="/devices" element={<DevicesPage />} />
           <Route path="/alerts" element={<AlertsPage />} />
           <Route path="/more" element={<MorePage />} />
+          <Route path="/customers" element={<CustomersPage />} />
+          <Route path="/inventory" element={<InventoryPage />} />
+          <Route path="/reports" element={<ReportsPage />} />
+          <Route path="/payouts" element={<PayoutsPage />} />
         </Routes>
         {!hideChrome && <AIAssistant />}
         {!hideChrome && <BottomNav />}

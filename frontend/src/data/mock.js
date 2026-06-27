@@ -236,3 +236,84 @@ export const moreSections = [
     ],
   },
 ];
+
+// ---------- Customers ----------
+export const customers = [
+  { id: "u1", name: "Riya Sharma", color: "#00F5A0", ltv: 482.30, visits: 24, last: "today", tags: ["VIP", "Vegan"], phone: "+1 415 555 2104", email: "riya@example.com" },
+  { id: "u2", name: "Daniel Cohen", color: "#A78BFA", ltv: 326.00, visits: 18, last: "today", tags: ["Coffee Loyalty"], phone: "+1 415 555 8810", email: "daniel@example.com" },
+  { id: "u3", name: "Emma Wright", color: "#F59E0B", ltv: 214.75, visits: 12, last: "2 days ago", tags: ["Birthday Aug"], phone: "+1 415 555 7720", email: "emma@example.com" },
+  { id: "u4", name: "Jonas Park", color: "#3B82F6", ltv: 189.40, visits: 11, last: "yesterday", tags: ["Decaf"], phone: "+1 415 555 1102", email: "jonas@example.com" },
+  { id: "u5", name: "Sophia Khan", color: "#F472B6", ltv: 142.20, visits: 9, last: "1 week ago", tags: [], phone: "+1 415 555 8830", email: "sophia@example.com" },
+  { id: "u6", name: "Alex Pereira", color: "#22D3EE", ltv: 92.50, visits: 6, last: "today", tags: ["Mobile orders"], phone: "+1 415 555 4242", email: "alex@example.com" },
+  { id: "u7", name: "Mia Robertson", color: "#FBBF24", ltv: 75.00, visits: 4, last: "3 days ago", tags: ["New"], phone: "+1 415 555 5565", email: "mia@example.com" },
+  { id: "u8", name: "Chris Tan", color: "#F87171", ltv: 41.10, visits: 2, last: "1 month ago", tags: ["At-risk"], phone: "+1 415 555 1111", email: "chris@example.com" },
+];
+
+// ---------- Inventory ----------
+export const inventory = [
+  { id: "i1", name: "Cappuccino", price: 4.5, stock: 999, category: "Beverages",
+    img: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=240&q=70" },
+  { id: "i2", name: "Latte", price: 4.75, stock: 999, category: "Beverages",
+    img: "https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=240&q=70" },
+  { id: "i3", name: "Espresso", price: 3.0, stock: 999, category: "Beverages",
+    img: "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=240&q=70" },
+  { id: "i4", name: "Mocha", price: 5.25, stock: 28, category: "Beverages",
+    img: "https://images.unsplash.com/photo-1578374173703-2dccf403e80a?w=240&q=70" },
+  { id: "i5", name: "Cold Brew Bottle", price: 6.5, stock: 7, category: "Beverages",
+    img: "https://images.unsplash.com/photo-1517959105821-eaf2591984ca?w=240&q=70" },
+  { id: "i6", name: "Croissant", price: 3.5, stock: 14, category: "Food",
+    img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=240&q=70" },
+  { id: "i7", name: "Blueberry Muffin", price: 3.25, stock: 8, category: "Food",
+    img: "https://images.unsplash.com/photo-1604882737082-e0b5b8d3e4e0?w=240&q=70" },
+  { id: "i8", name: "Bagel", price: 2.75, stock: 22, category: "Food",
+    img: "https://images.unsplash.com/photo-1592151450283-fa01d5b5af8a?w=240&q=70" },
+  { id: "i9", name: "Oat Milk", price: 2.0, stock: 3, category: "Beverages",
+    img: "https://images.unsplash.com/photo-1600788907416-456578634209?w=240&q=70" },
+  { id: "i10", name: "Brown Sugar Syrup", price: 1.5, stock: 0, category: "Beverages",
+    img: "https://images.unsplash.com/photo-1610632380989-680fe40816c6?w=240&q=70" },
+  { id: "i11", name: "Matcha Tin", price: 18.0, stock: 4, category: "Beverages",
+    img: "https://images.unsplash.com/photo-1545987796-200677ee1011?w=240&q=70" },
+  { id: "i12", name: "Almond Biscotti", price: 2.5, stock: 6, category: "Food",
+    img: "https://images.unsplash.com/photo-1610329739319-3d97cb6b30e9?w=240&q=70" },
+];
+
+// ---------- Reports ----------
+export const reportsData = {
+  weekLabels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  weekRevenue: [720, 880, 1010, 940, 1102, 1180, 1284],
+  kpis: {
+    revenue: 7116.50,
+    revenueDelta: 14.6,
+    gross: 7402.00,
+    refunds: 142.50,
+    tips: 384.00,
+    taxes: 558.20,
+  },
+  topSellers: [
+    { name: "Iced Latte", units: 124, revenue: 558.00 },
+    { name: "Croissant", units: 96, revenue: 336.00 },
+    { name: "Avocado Toast", units: 64, revenue: 544.00 },
+    { name: "Cold Brew", units: 58, revenue: 261.00 },
+    { name: "Blueberry Muffin", units: 47, revenue: 152.75 },
+  ],
+  categoryMix: [
+    { label: "Beverages", value: 4280, color: "#00F5A0" },
+    { label: "Food", value: 1820, color: "#3B82F6" },
+    { label: "Retail", value: 640, color: "#F59E0B" },
+    { label: "Gift", value: 376, color: "#A78BFA" },
+  ],
+};
+
+// ---------- Payouts ----------
+export const payouts = [
+  { id: "py1", amount: 612.40, status: "scheduled", date: "Tomorrow · 9:00 AM", bank: "Chase •• 4421", txCount: 18 },
+  { id: "py2", amount: 1102.00, status: "paid", date: "Yesterday", bank: "Chase •• 4421", txCount: 28 },
+  { id: "py3", amount: 980.50, status: "paid", date: "Feb 24", bank: "Chase •• 4421", txCount: 24 },
+  { id: "py4", amount: 1216.30, status: "paid", date: "Feb 23", bank: "Chase •• 4421", txCount: 31 },
+  { id: "py5", amount: 845.20, status: "paid", date: "Feb 22", bank: "Chase •• 4421", txCount: 22 },
+  { id: "py6", amount: 730.10, status: "paid", date: "Feb 21", bank: "Chase •• 4421", txCount: 19 },
+];
+
+export const payoutSchedule = {
+  cadence: "Daily · automatic",
+};

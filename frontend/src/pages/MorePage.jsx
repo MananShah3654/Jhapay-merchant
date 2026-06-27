@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import {
   ChevronRight,
   LogOut,
@@ -44,11 +46,28 @@ const iconMap = {
   "life-buoy": LifeBuoy,
 };
 
+const ROUTE_MAP = {
+  customers: "/customers",
+  inventory: "/inventory",
+  reports: "/reports",
+  payouts: "/payouts",
+  transactions: "/activity",
+  devices: "/devices",
+  notifs: "/alerts",
+};
+
 function Tile({ item }) {
   const Icon = iconMap[item.icon] || ClipboardList;
+  const navigate = useNavigate();
+  const onClick = () => {
+    const route = ROUTE_MAP[item.id];
+    if (route) navigate(route);
+    else toast(`${item.label} · coming soon`, { description: "We're polishing this one." });
+  };
   return (
     <button
       data-testid={`more-${item.id}`}
+      onClick={onClick}
       className="rounded-[18px] flex flex-col items-center gap-2 py-4 jh-press"
       style={{
         background: "#16161A",

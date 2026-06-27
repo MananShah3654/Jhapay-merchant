@@ -390,6 +390,10 @@ export default function HomePage() {
 
   const onPointerDown = (e) => {
     if (e.pointerType === "mouse" && e.button !== 0) return;
+    // Capture the pointer on the carousel so inner buttons don't steal subsequent move events.
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch (_) {}
     trackerRef.current = {
       startX: e.clientX,
       startY: e.clientY,
@@ -429,8 +433,11 @@ export default function HomePage() {
   const onPointerUp = (e) => {
     const t = trackerRef.current;
     if (!dragging || e.pointerId !== t.pointerId) return;
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch (_) {}
     setDragging(false);
-    const threshold = 60;
+    const threshold = 50;
     if (dragX < -threshold && idx < TABS.length - 1) setTab(TABS[idx + 1]);
     else if (dragX > threshold && idx > 0) setTab(TABS[idx - 1]);
     setDragX(0);
