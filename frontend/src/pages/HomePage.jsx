@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Calculator,
@@ -6,7 +6,6 @@ import {
   Star,
   Plus,
   Delete,
-  StickyNote,
   Search,
   Coffee,
   UtensilsCrossed,
@@ -19,10 +18,11 @@ import {
   Trash2,
 } from "lucide-react";
 import TopBar from "@/components/TopBar";
-import { Card, currency } from "@/components/Primitives";
+import { Card } from "@/components/Primitives";
 import { catalog, catalogCategories } from "@/data/mock";
 
 const KEYS = ["1","2","3","4","5","6","7","8","9","C","0","del"];
+const TABS = ["keyin", "catalog", "quicklist"];
 
 function Segmented({ value, onChange }) {
   const items = [
@@ -30,15 +30,28 @@ function Segmented({ value, onChange }) {
     { id: "catalog", label: "Catalog", icon: ShoppingBasket, testid: "seg-catalog" },
     { id: "quicklist", label: "Quick List", icon: Star, testid: "seg-quicklist" },
   ];
+  const activeIdx = items.findIndex((i) => i.id === value);
   return (
     <div
-      className="grid grid-cols-3 gap-1 p-1 rounded-[18px]"
+      className="relative grid grid-cols-3 gap-1 p-1 rounded-[18px]"
       style={{
         background: "rgba(22, 22, 26, 0.85)",
         border: "1px solid rgba(255,255,255,0.06)",
       }}
       data-testid="segmented-control"
     >
+      {/* Sliding pill */}
+      <div
+        aria-hidden
+        className="absolute top-1 bottom-1 rounded-[14px] pointer-events-none"
+        style={{
+          width: "calc(33.333% - 5px)",
+          left: `calc(${activeIdx} * 33.333% + 4px)`,
+          background: "linear-gradient(180deg, #00F5A0 0%, #00D78A 100%)",
+          boxShadow: "0 6px 18px rgba(0,245,160,0.35)",
+          transition: "left 320ms cubic-bezier(0.22, 1, 0.36, 1)",
+        }}
+      />
       {items.map((it) => {
         const active = value === it.id;
         const Icon = it.icon;
@@ -47,16 +60,7 @@ function Segmented({ value, onChange }) {
             key={it.id}
             data-testid={it.testid}
             onClick={() => onChange(it.id)}
-            className="relative h-11 rounded-[14px] flex items-center justify-center gap-1.5 jh-press"
-            style={
-              active
-                ? {
-                    background:
-                      "linear-gradient(180deg, #00F5A0 0%, #00D78A 100%)",
-                    boxShadow: "0 6px 18px rgba(0,245,160,0.35)",
-                  }
-                : { background: "transparent" }
-            }
+            className="relative h-11 rounded-[14px] flex items-center justify-center gap-1.5 jh-press z-[1]"
           >
             <Icon size={14} color={active ? "#0A0A0B" : "#A3A3AC"} strokeWidth={2.2} />
             <span
@@ -84,7 +88,7 @@ function KeyInView({ cents, setCents }) {
   };
   const amount = (cents / 100).toFixed(2);
   return (
-    <div className="mt-5" data-testid="keyin-view">
+    <div data-testid="keyin-view">
       <div className="px-1 flex items-start justify-between">
         <div>
           <div
@@ -155,9 +159,11 @@ function CatalogView({ cart, setCart, query, setQuery }) {
   const add = (p) => setCart((c) => [...c, p]);
 
   return (
-    <div className="mt-4" data-testid="catalog-view">
-      <div className="flex items-center gap-2 px-3 py-2.5 rounded-[16px]"
-        style={{ background: "#16161A", border: "1px solid rgba(255,255,255,0.06)" }}>
+    <div data-testid="catalog-view">
+      <div
+        className="flex items-center gap-2 px-3 py-2.5 rounded-[16px]"
+        style={{ background: "#16161A", border: "1px solid rgba(255,255,255,0.06)" }}
+      >
         <Search size={16} color="#6E6E78" />
         <input
           data-testid="catalog-search"
@@ -169,9 +175,10 @@ function CatalogView({ cart, setCart, query, setQuery }) {
       </div>
 
       <div className="mt-3 grid grid-cols-[110px_1fr] gap-3">
-        {/* Left rail categories */}
-        <div className="rounded-[18px] p-1.5"
-          style={{ background: "#16161A", border: "1px solid rgba(255,255,255,0.06)" }}>
+        <div
+          className="rounded-[18px] p-1.5"
+          style={{ background: "#16161A", border: "1px solid rgba(255,255,255,0.06)" }}
+        >
           <div className="flex flex-col gap-1 max-h-[320px] overflow-y-auto pr-1">
             {catalogCategories.map((c) => {
               const Icon = catIcons[c.icon] || Grid2x2;
@@ -184,9 +191,7 @@ function CatalogView({ cart, setCart, query, setQuery }) {
                   className="flex items-center gap-2 px-2 py-2.5 rounded-[12px] jh-press text-left"
                   style={{
                     background: active ? "rgba(0,245,160,0.08)" : "transparent",
-                    boxShadow: active
-                      ? "inset 2px 0 0 #00F5A0"
-                      : "none",
+                    boxShadow: active ? "inset 2px 0 0 #00F5A0" : "none",
                   }}
                 >
                   <Icon size={14} color={active ? "#00F5A0" : "#A3A3AC"} strokeWidth={1.8} />
@@ -203,9 +208,10 @@ function CatalogView({ cart, setCart, query, setQuery }) {
           </div>
         </div>
 
-        {/* Items */}
-        <div className="rounded-[18px] overflow-hidden"
-          style={{ background: "#16161A", border: "1px solid rgba(255,255,255,0.06)" }}>
+        <div
+          className="rounded-[18px] overflow-hidden"
+          style={{ background: "#16161A", border: "1px solid rgba(255,255,255,0.06)" }}
+        >
           <div className="max-h-[320px] overflow-y-auto">
             {items.map((p, i, arr) => (
               <button
@@ -247,7 +253,6 @@ function CatalogView({ cart, setCart, query, setQuery }) {
         </div>
       </div>
 
-      {/* Cart summary */}
       {cart.length > 0 && (
         <div className="mt-3">
           <Card className="p-3" testid="cart-summary">
@@ -283,9 +288,9 @@ function CatalogView({ cart, setCart, query, setQuery }) {
 
 function QuickListView() {
   return (
-    <div className="mt-6 flex flex-col items-center text-center pb-2" data-testid="quicklist-view">
+    <div className="flex flex-col items-center text-center pb-2" data-testid="quicklist-view">
       <div
-        className="grid place-items-center w-16 h-16 rounded-2xl mb-3"
+        className="grid place-items-center w-16 h-16 rounded-2xl mb-3 mt-4"
         style={{
           background: "rgba(0,245,160,0.10)",
           border: "1px solid rgba(0,245,160,0.25)",
@@ -300,7 +305,8 @@ function QuickListView() {
         Add your most used items here for faster checkout.
       </div>
 
-      <div className="mt-5 grid grid-cols-3 gap-2 w-full max-w-[280px]"
+      <div
+        className="mt-5 grid grid-cols-3 gap-2 w-full max-w-[280px]"
         style={{
           padding: "10px",
           borderRadius: "20px",
@@ -340,12 +346,104 @@ function QuickListView() {
   );
 }
 
+/* ---------------- Swipeable carousel ---------------- */
+
+function SwipeDots({ idx }) {
+  return (
+    <div className="flex items-center justify-center gap-1.5 pt-3" data-testid="swipe-dots">
+      {TABS.map((t, i) => (
+        <span
+          key={t}
+          className="rounded-full transition-all"
+          style={{
+            width: i === idx ? 18 : 5,
+            height: 5,
+            background: i === idx ? "#00F5A0" : "rgba(255,255,255,0.18)",
+            boxShadow: i === idx ? "0 0 8px rgba(0,245,160,0.6)" : "none",
+            transition: "width 280ms cubic-bezier(0.22, 1, 0.36, 1), background 280ms ease",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 export default function HomePage() {
   const navigate = useNavigate();
   const [tab, setTab] = useState("keyin");
   const [cents, setCents] = useState(0);
   const [cart, setCart] = useState([]);
   const [query, setQuery] = useState("");
+
+  const idx = TABS.indexOf(tab);
+
+  // Swipe state
+  const [dragX, setDragX] = useState(0);
+  const [dragging, setDragging] = useState(false);
+  const trackerRef = useRef({
+    startX: 0,
+    startY: 0,
+    lock: null, // 'h' | 'v' | null
+    pointerId: null,
+    swiped: false,
+  });
+
+  const onPointerDown = (e) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    trackerRef.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      lock: null,
+      pointerId: e.pointerId,
+      swiped: false,
+    };
+    setDragging(true);
+  };
+
+  const onPointerMove = (e) => {
+    const t = trackerRef.current;
+    if (!dragging || e.pointerId !== t.pointerId) return;
+    const dx = e.clientX - t.startX;
+    const dy = e.clientY - t.startY;
+
+    if (!t.lock) {
+      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+      t.lock = Math.abs(dx) > Math.abs(dy) ? "h" : "v";
+      if (t.lock === "v") {
+        setDragging(false);
+        return;
+      }
+    }
+
+    if (t.lock === "h") {
+      t.swiped = Math.abs(dx) > 6;
+      let resisted = dx;
+      // resist past edges
+      if ((idx === 0 && dx > 0) || (idx === TABS.length - 1 && dx < 0)) {
+        resisted = dx * 0.3;
+      }
+      setDragX(resisted);
+    }
+  };
+
+  const onPointerUp = (e) => {
+    const t = trackerRef.current;
+    if (!dragging || e.pointerId !== t.pointerId) return;
+    setDragging(false);
+    const threshold = 60;
+    if (dragX < -threshold && idx < TABS.length - 1) setTab(TABS[idx + 1]);
+    else if (dragX > threshold && idx > 0) setTab(TABS[idx - 1]);
+    setDragX(0);
+  };
+
+  // Block clicks (e.g., on keypad buttons) that happen right after a swipe gesture.
+  const onClickCapture = (e) => {
+    if (trackerRef.current.swiped) {
+      e.stopPropagation();
+      e.preventDefault();
+      trackerRef.current.swiped = false;
+    }
+  };
 
   const cartTotal = cart.reduce((s, p) => s + p.price, 0);
   const grandTotal = tab === "catalog" ? cartTotal * 100 + cents : cents;
@@ -363,16 +461,59 @@ export default function HomePage() {
 
       <div className="px-4 pt-3">
         <Segmented value={tab} onChange={setTab} />
+        <SwipeDots idx={idx} />
+      </div>
 
-        {tab === "keyin" && <KeyInView cents={cents} setCents={setCents} />}
-        {tab === "catalog" && (
-          <CatalogView cart={cart} setCart={setCart} query={query} setQuery={setQuery} />
-        )}
-        {tab === "quicklist" && <QuickListView />}
+      {/* Swipe carousel */}
+      <div
+        className="overflow-hidden mt-2"
+        data-testid="swipe-carousel"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        onClickCapture={onClickCapture}
+        style={{ touchAction: "pan-y" }}
+      >
+        <div
+          className="flex"
+          style={{
+            width: "100%",
+            transform: `translate3d(calc(${-idx * 100}% + ${dragX}px), 0, 0)`,
+            transition: dragging
+              ? "none"
+              : "transform 360ms cubic-bezier(0.22, 1, 0.36, 1)",
+          }}
+        >
+          <div
+            className="px-4 pt-3"
+            style={{ minWidth: "100%", flexShrink: 0 }}
+            data-testid="slide-keyin"
+          >
+            <KeyInView cents={cents} setCents={setCents} />
+          </div>
+          <div
+            className="px-4 pt-3"
+            style={{ minWidth: "100%", flexShrink: 0 }}
+            data-testid="slide-catalog"
+          >
+            <CatalogView cart={cart} setCart={setCart} query={query} setQuery={setQuery} />
+          </div>
+          <div
+            className="px-4 pt-3"
+            style={{ minWidth: "100%", flexShrink: 0 }}
+            data-testid="slide-quicklist"
+          >
+            <QuickListView />
+          </div>
+        </div>
       </div>
 
       {/* Charge bar */}
-      <div className="fixed bottom-[88px] left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-[408px]" style={{ zIndex: 30 }}>
+      <div
+        className="fixed bottom-[88px] left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-[408px]"
+        style={{ zIndex: 30 }}
+      >
         <button
           data-testid="charge-btn"
           disabled={!canCharge}
