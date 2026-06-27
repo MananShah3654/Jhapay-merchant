@@ -390,10 +390,7 @@ export default function HomePage() {
 
   const onPointerDown = (e) => {
     if (e.pointerType === "mouse" && e.button !== 0) return;
-    // Capture the pointer on the carousel so inner buttons don't steal subsequent move events.
-    try {
-      e.currentTarget.setPointerCapture(e.pointerId);
-    } catch (_) {}
+    // Do NOT setPointerCapture here — it would hijack the synthesized click on pure taps.
     trackerRef.current = {
       startX: e.clientX,
       startY: e.clientY,
@@ -417,12 +414,15 @@ export default function HomePage() {
         setDragging(false);
         return;
       }
+      // Engage capture only once we know this is a horizontal swipe — preserves taps.
+      try {
+        e.currentTarget.setPointerCapture(e.pointerId);
+      } catch (_) {}
     }
 
     if (t.lock === "h") {
       t.swiped = Math.abs(dx) > 6;
       let resisted = dx;
-      // resist past edges
       if ((idx === 0 && dx > 0) || (idx === TABS.length - 1 && dx < 0)) {
         resisted = dx * 0.3;
       }
