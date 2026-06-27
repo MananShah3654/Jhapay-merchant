@@ -18,7 +18,7 @@ function iconFor(name) {
 
 export default function DevicesPage() {
   return (
-    <div className="pb-6" data-testid="devices-page">
+    <div className="pb-32" data-testid="devices-page">
       <TopBar />
       <div className="px-5 mt-3">
         <div className="flex items-center justify-between">

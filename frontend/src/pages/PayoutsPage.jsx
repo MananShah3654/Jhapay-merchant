@@ -21,7 +21,7 @@ export default function PayoutsPage() {
     .reduce((s, p) => s + p.amount, 0);
 
   return (
-    <div className="pb-6" data-testid="payouts-page">
+    <div className="pb-32" data-testid="payouts-page">
       <SubPageHeader eyebrow="Payments & Finance" title="Payouts" />
 
       <div className="px-5 mt-3 jh-stagger">

@@ -153,7 +153,7 @@ export default function ActivityPage() {
   );
 
   return (
-    <div className="pb-6" data-testid="activity-page">
+    <div className="pb-32" data-testid="activity-page">
       <TopBar />
       <div className="px-5 mt-3">
         <div className="text-[26px] font-bold tracking-tight text-white">Activity</div>

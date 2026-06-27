@@ -1,0 +1,32 @@
+{
+  "summary": "Iteration 5 (frontend-only re-test after pb-6 -> pb-32 fix on 8 pages). All 7 tests pass. The iteration-4 layout-overlap regression on MorePage is RESOLVED: with the bottom container padded to pb-32, the page is now scrollable (docHeight=1189 vs viewport=844, scroll range=345px). After scrolling to the bottom (natural user gesture on a long page), the 'Tools & Settings' last-row tiles (Devices/Notifications/Settings/Support) sit at y~475-557, well above the BottomNav at y=757-828, so a REAL pointer click on more-devices correctly navigates to /devices. The more-settings tile (non-routed) in the same row shows the 'Settings · coming soon' sonner toast without navigation. All previously-passing flows continue to work: tap key-5 -> $0.05; swipe-while-pressing key-5 does NOT enter a digit and switches segment (amount stays $0.00, Catalog visible); pure swipes navigate Key In <-> Catalog <-> Quick List; sub-pages /customers /inventory /reports /payouts all render. NOTE: at scroll=0 (default load position) the last row tiles are still partially hidden behind the fixed nav (tile y=820 vs nav y=757) so a user who never scrolls cannot see/tap them — but the page is now visibly scrollable and natural scrolling brings them into a clearly tappable area, which matches the intended UX for a long More page. This is the expected behaviour for any scrollable page with a floating bottom-nav and is not a regression.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "MorePage", "issues": ["At default scroll position (scroll=0), the last grid row ('Tools & Settings') is still partially obscured by the floating BottomNav. Page is scrollable so users CAN reach it by scrolling, but on first load there is no visual cue that more content exists below the nav. Optional polish: add a subtle bottom-fade gradient or top-bar 'scroll for more' hint, or further increase pb to pb-36/pb-40 to reduce the initial overlap. Functionally non-blocking."]}
+    ]
+  },
+  "test_report_links": ["/app/test_reports/iteration_5.json"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "pb-32 fix is correct and consistent across the 8 long pages (MorePage, Customers, Inventory, Reports, Payouts, Devices, Alerts, Activity). For long-term maintainability, consider extracting a shared <PageBody/> layout primitive that applies bottom-safe-area + nav-height padding automatically so future pages don't need to remember this value.",
+    "MorePage scroll behaviour: at scroll=0 the last row is still under the nav. If product wants zero-scroll reachability on a 390x844 viewport, the layout would need to be shortened (smaller header / smaller profile card / fewer rows) or the nav would need to be in normal document flow. Current behaviour is acceptable given the page is clearly scrollable.",
+    "HomePage swipe-vs-tap logic continues to work correctly (setPointerCapture deferred until horizontal lock) — keep this approach.",
+    "ROUTE_MAP in MorePage.jsx still duplicates routing info that could live on moreSections items (optional refactor)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (skipped per request)", "frontend": "7/7 explicit assertions pass (100%)"},
+  "test_credentials": "N/A (no auth)",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Iteration-4 layout overlap regression is FIXED. pb-32 applied uniformly to MorePage / CustomersPage / InventoryPage / ReportsPage / PayoutsPage / DevicesPage / AlertsPage / ActivityPage. To re-verify the more-devices route on viewport 390x844: goto /more, then window.scrollTo(0, document.documentElement.scrollHeight), then click [data-testid='more-devices'] — URL must end with /devices. At scroll=0 a real pointer click is still intercepted by the bottom-nav-activity icon because the tile sits at y=820 (partially below the nav at y=757); this is the expected scrollable-page UX, not a bug. All routed More tiles (more-customers / more-inventory / more-reports / more-payouts / more-transactions / more-notifs / more-devices) work; non-routed tiles (e.g., more-settings, more-orders) show 'X · coming soon' sonner toast. Keypad tap-vs-swipe and segment swipe all still pass.",
+  "rca of the issue": {
+    "title": "iteration-4 finding 'more-devices tile tap routed to /activity' — RESOLVED by pb-32 padding",
+    "reproduction": "1. viewport 390x844. 2. goto /more. 3. scroll page to bottom (natural user gesture as document is now 1189px tall vs 844 viewport). 4. tap [data-testid='more-devices']. URL becomes /devices (PASS).",
+    "root_cause": "Previous pb-6 (24px) was insufficient bottom padding so the last grid row at the end of the document still overlapped the floating 71px-tall BottomNav even after fully scrolling. The fix pads the document bottom by 128px (pb-32) so when the user scrolls fully, the last row sits ~200px above the nav, well clear of the overlap.",
+    "mitigation": "pb-32 applied on outer wrapper of MorePage and 7 sibling long pages. Verified via Playwright: after scrolling to bottom, tile_bottom (557) < nav_top (757) — no overlap, real-pointer click registers on the tile and navigates correctly."
+  }
+}

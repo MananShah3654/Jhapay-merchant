@@ -35,7 +35,7 @@ export default function CustomersPage() {
   const totalLTV = customers.reduce((s, c) => s + c.ltv, 0);
 
   return (
-    <div className="pb-6" data-testid="customers-page">
+    <div className="pb-32" data-testid="customers-page">
       <SubPageHeader
         eyebrow="Business"
         title="Customers"

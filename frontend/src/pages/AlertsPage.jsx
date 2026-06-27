@@ -18,7 +18,7 @@ export default function AlertsPage() {
   const markAll = () => setItems((arr) => arr.map((a) => ({ ...a, unread: false })));
 
   return (
-    <div className="pb-6" data-testid="alerts-page">
+    <div className="pb-32" data-testid="alerts-page">
       <TopBar />
       <div className="px-5 mt-3">
         <div className="flex items-end justify-between">

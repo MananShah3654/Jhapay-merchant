@@ -47,7 +47,7 @@ export default function InventoryPage() {
   const outCount = inventory.filter((p) => p.stock === 0).length;
 
   return (
-    <div className="pb-6" data-testid="inventory-page">
+    <div className="pb-32" data-testid="inventory-page">
       <SubPageHeader
         eyebrow="Business"
         title="Inventory"

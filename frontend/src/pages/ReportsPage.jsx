@@ -115,7 +115,7 @@ export default function ReportsPage() {
   const categoryTotal = categoryMix.reduce((s, c) => s + c.value, 0);
 
   return (
-    <div className="pb-6" data-testid="reports-page">
+    <div className="pb-32" data-testid="reports-page">
       <SubPageHeader
         eyebrow="Sales"
         title="Reports"

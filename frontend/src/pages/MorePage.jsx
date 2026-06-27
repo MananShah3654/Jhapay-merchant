@@ -84,7 +84,7 @@ function Tile({ item }) {
 
 export default function MorePage() {
   return (
-    <div className="pb-6" data-testid="more-page">
+    <div className="pb-32" data-testid="more-page">
       <TopBar />
       <div className="px-5 mt-3">
         <div className="text-[26px] font-bold tracking-tight text-white">More</div>
