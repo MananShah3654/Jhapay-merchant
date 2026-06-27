@@ -97,7 +97,7 @@ export default function MorePage() {
             border: "1px solid rgba(239, 68, 68, 0.25)",
           }}
         >
-          <LogOut size={15} color="#EF4444" strokeWidth={2.2} />
+          <LogOut size={15} className="text-[#EF4444]" strokeWidth={2.2} />
           <span className="text-[13px] font-semibold text-[#EF4444]">Sign Out</span>
         </button>
 
