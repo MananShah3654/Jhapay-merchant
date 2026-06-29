@@ -69,33 +69,33 @@ export default function InventoryPage() {
       <div className="px-5 mt-3">
         <div className="grid grid-cols-3 gap-2 jh-stagger">
           <Card className="p-3" testid="stat-items">
-            <Package size={14} color="#00F5A0" />
-            <div className="text-[10px] text-[#A3A3AC] font-medium mt-1.5">Items</div>
-            <div className="jh-num text-[18px] font-bold text-white">{inventory.length}</div>
+            <Package size={14} color="var(--jh-primary)" />
+            <div className="text-[10px] text-[color:var(--jh-text-2)] font-medium mt-1.5">Items</div>
+            <div className="jh-num text-[18px] font-bold text-[color:var(--jh-text)]">{inventory.length}</div>
           </Card>
           <Card className="p-3" testid="stat-low">
-            <AlertTriangle size={14} color="#F59E0B" />
-            <div className="text-[10px] text-[#A3A3AC] font-medium mt-1.5">Low</div>
-            <div className="jh-num text-[18px] font-bold text-[#F59E0B]">{lowCount}</div>
+            <AlertTriangle size={14} color="var(--jh-warning)" />
+            <div className="text-[10px] text-[color:var(--jh-text-2)] font-medium mt-1.5">Low</div>
+            <div className="jh-num text-[18px] font-bold text-[color:var(--jh-warning)]">{lowCount}</div>
           </Card>
           <Card className="p-3" testid="stat-value">
-            <div className="grid place-items-center w-3.5 h-3.5 rounded-full border-2 border-[#3B82F6]" />
-            <div className="text-[10px] text-[#A3A3AC] font-medium mt-1.5">Value</div>
-            <div className="jh-num text-[18px] font-bold text-white">{currency(totalValue)}</div>
+            <div className="grid place-items-center w-3.5 h-3.5 rounded-full border-2 border-[color:var(--jh-info)]" />
+            <div className="text-[10px] text-[color:var(--jh-text-2)] font-medium mt-1.5">Value</div>
+            <div className="jh-num text-[18px] font-bold text-[color:var(--jh-text)]">{currency(totalValue)}</div>
           </Card>
         </div>
 
         <div
           className="mt-3 flex items-center gap-2 px-3 py-2.5 rounded-[16px]"
-          style={{ background: "#16161A", border: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ background: "var(--jh-surface)", border: "1px solid var(--jh-border-soft)" }}
         >
-          <Search size={16} color="#6E6E78" />
+          <Search size={16} color="var(--jh-text-3)" />
           <input
             data-testid="inventory-search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search items"
-            className="flex-1 outline-none text-[13px] bg-transparent placeholder:text-[#6E6E78] text-white"
+            className="flex-1 outline-none text-[13px] bg-transparent placeholder:text-[color:var(--jh-text-3)] text-[color:var(--jh-text)]"
           />
         </div>
 
@@ -117,9 +117,9 @@ export default function InventoryPage() {
                         boxShadow: "0 6px 16px rgba(0,245,160,0.30)",
                       }
                     : {
-                        background: "#16161A",
-                        color: "#A3A3AC",
-                        border: "1px solid rgba(255,255,255,0.06)",
+                        background: "var(--jh-surface)",
+                        color: "var(--jh-text-2)",
+                        border: "1px solid var(--jh-border-soft)",
                       }
                 }
               >
@@ -136,15 +136,15 @@ export default function InventoryPage() {
               className="grid place-items-center w-8 h-8 rounded-full"
               style={{ background: "rgba(245,158,11,0.12)" }}
             >
-              <AlertTriangle size={14} color="#F59E0B" />
+              <AlertTriangle size={14} color="var(--jh-warning)" />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-[12px] font-semibold text-white">
+              <div className="text-[12px] font-semibold text-[color:var(--jh-text)]">
                 {outCount} out of stock
               </div>
-              <div className="text-[11px] text-[#A3A3AC]">Tap to reorder from your suppliers.</div>
+              <div className="text-[11px] text-[color:var(--jh-text-2)]">Tap to reorder from your suppliers.</div>
             </div>
-            <ChevronRight size={14} color="#6E6E78" />
+            <ChevronRight size={14} color="var(--jh-text-3)" />
           </Card>
         )}
 
@@ -154,9 +154,9 @@ export default function InventoryPage() {
               key={p.id}
               data-testid={`item-${p.id}`}
               className="rounded-[20px] overflow-hidden text-left jh-press"
-              style={{ background: "#16161A", border: "1px solid rgba(255,255,255,0.06)" }}
+              style={{ background: "var(--jh-surface)", border: "1px solid var(--jh-border-soft)" }}
             >
-              <div className="w-full aspect-square relative overflow-hidden" style={{ background: "#1F1F24" }}>
+              <div className="w-full aspect-square relative overflow-hidden" style={{ background: "var(--jh-surface-2)" }}>
                 <img
                   src={p.img}
                   alt={p.name}
@@ -168,16 +168,16 @@ export default function InventoryPage() {
                 </div>
               </div>
               <div className="p-3">
-                <div className="text-[13px] font-semibold text-white truncate">{p.name}</div>
+                <div className="text-[13px] font-semibold text-[color:var(--jh-text)] truncate">{p.name}</div>
                 <div className="flex items-center justify-between mt-0.5">
-                  <div className="text-[11px] text-[#A3A3AC]">{p.category}</div>
-                  <div className="jh-num text-[13px] font-bold text-white">${p.price.toFixed(2)}</div>
+                  <div className="text-[11px] text-[color:var(--jh-text-2)]">{p.category}</div>
+                  <div className="jh-num text-[13px] font-bold text-[color:var(--jh-text)]">${p.price.toFixed(2)}</div>
                 </div>
               </div>
             </button>
           ))}
           {filtered.length === 0 && (
-            <div className="col-span-2 text-center text-[13px] text-[#A3A3AC] py-10">
+            <div className="col-span-2 text-center text-[13px] text-[color:var(--jh-text-2)] py-10">
               No items match.
             </div>
           )}

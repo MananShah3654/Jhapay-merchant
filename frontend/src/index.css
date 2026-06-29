@@ -64,11 +64,15 @@ body {
 
 @media (min-width: 768px) {
     .jh-phone-frame {
-        min-height: 92vh;
+        /* Fixed height + internal scroll so `position: sticky` headers stick to
+           the top of the phone. `overflow: hidden` here would break sticky. */
+        height: 92vh;
         margin-top: 4vh;
         margin-bottom: 4vh;
         border-radius: 44px;
-        overflow: hidden;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: none; /* Firefox — webkit scrollbars hidden globally */
         box-shadow:
             0 40px 100px rgba(0, 0, 0, 0.6),
             0 8px 28px rgba(0, 0, 0, 0.4),
@@ -274,3 +278,124 @@ body {
     * { @apply border-border; }
     body { @apply bg-background text-foreground; }
 }
+
+/* ============================================================== */
+/* LIGHT THEME — opt-in via [data-theme="light"] on <html>.        */
+/* Dark stays the default. Toggle in JS:                           */
+/*   document.documentElement.dataset.theme = "light";   // light  */
+/*   document.documentElement.removeAttribute("data-theme"); // dark*/
+/* These rules are unlayered and last in source order, so they     */
+/* override both the dark :root tokens and the @layer base tokens. */
+/* ============================================================== */
+[data-theme="light"] {
+    /* Brand (mint deepened so it stays legible on light surfaces) */
+    --jh-primary: #00C27A;
+    --jh-primary-strong: #00A368;
+    --jh-primary-dim: rgba(0, 194, 122, 0.12);
+    --jh-primary-glow: rgba(0, 194, 122, 0.30);
+
+    /* Status (deepened for contrast on light) */
+    --jh-success: #16A34A;
+    --jh-warning: #D97706;
+    --jh-danger: #DC2626;
+    --jh-info: #2563EB;
+
+    /* Light surfaces */
+    --jh-bg: #F4F6F5;
+    --jh-surface: #FFFFFF;
+    --jh-surface-2: #EDF1EF;
+    --jh-surface-3: #E2E7E4;
+    --jh-border: #E2E7E4;
+    --jh-border-soft: #EDF1EF;
+
+    /* Text */
+    --jh-text: #0F1715;
+    --jh-text-2: #5C6B65;
+    --jh-text-3: #9AA6A1;
+    --jh-icon: #5C6B65;
+
+    /* shadcn/ui HSL tokens — light */
+    --background: 150 12% 96%;
+    --foreground: 160 23% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 160 23% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 23% 8%;
+    --primary: 158 100% 38%;
+    --primary-foreground: 150 30% 6%;
+    --secondary: 150 10% 92%;
+    --secondary-foreground: 160 23% 12%;
+    --muted: 150 10% 92%;
+    --muted-foreground: 155 8% 42%;
+    --accent: 158 55% 90%;
+    --accent-foreground: 158 100% 22%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 150 8% 88%;
+    --input: 150 8% 88%;
+    --ring: 158 100% 38%;
+}
+
+/* Desktop stage backdrop + phone frame — light */
+@media (min-width: 768px) {
+    [data-theme="light"] body.jh-stage {
+        background: radial-gradient(1200px 600px at 50% -10%, #E8F5EE 0%, #F4F6F5 60%);
+    }
+    [data-theme="light"] .jh-phone-frame {
+        box-shadow:
+            0 40px 100px rgba(0, 0, 0, 0.12),
+            0 8px 28px rgba(0, 0, 0, 0.08),
+            inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+}
+
+/* Glass — light */
+[data-theme="light"] .jh-glass {
+    background: rgba(255, 255, 255, 0.72);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+[data-theme="light"] .jh-glass-strong {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Shadows — soft light (Apple-style) */
+[data-theme="light"] .jh-shadow-card {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+[data-theme="light"] .jh-shadow-float {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+}
+[data-theme="light"] .jh-glow-green {
+    box-shadow: 0 0 0 1px rgba(0, 194, 122, 0.25), 0 10px 30px rgba(0, 194, 122, 0.18);
+}
+[data-theme="light"] .jh-shadow-orb {
+    box-shadow:
+        0 0 0 6px rgba(0, 194, 122, 0.10),
+        0 14px 36px rgba(0, 194, 122, 0.35),
+        inset 0 -6px 14px rgba(0, 0, 0, 0.12),
+        inset 0 6px 14px rgba(255, 255, 255, 0.55);
+}
+
+/* Skeleton shimmer — light */
+[data-theme="light"] .jh-skeleton {
+    background: linear-gradient(90deg, #E8ECEA 0%, #F2F5F3 50%, #E8ECEA 100%);
+    background-size: 800px 100%;
+}
+
+/* Keypad keys — light */
+[data-theme="light"] .jh-key {
+    background: #F0F3F1;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+[data-theme="light"] .jh-key:hover { background: #E8ECEA; }
+[data-theme="light"] .jh-key:active {
+    background: rgba(0, 194, 122, 0.14);
+    transform: scale(0.96);
+    box-shadow: inset 0 0 0 1px rgba(0, 194, 122, 0.40);
+}
+
+/* Hairline + selection — light */
+[data-theme="light"] .jh-hairline { border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
+[data-theme="light"] ::selection { background: rgba(0, 194, 122, 0.20); color: var(--jh-text); }

@@ -58,7 +58,7 @@ export default function SuccessPage() {
       className="relative min-h-[100dvh] flex flex-col items-center justify-between px-6 pt-16 pb-10"
       style={{
         background:
-          "radial-gradient(800px 400px at 50% 0%, rgba(0,245,160,0.20) 0%, rgba(0,245,160,0) 60%), #0A0A0B",
+          "radial-gradient(800px 400px at 50% 0%, rgba(0,245,160,0.20) 0%, rgba(0,245,160,0) 60%), var(--jh-bg)",
       }}
       data-testid="success-page"
     >
@@ -69,23 +69,23 @@ export default function SuccessPage() {
           className="grid place-items-center w-24 h-24 rounded-full jh-fade-in"
           style={{
             background:
-              "radial-gradient(circle at 30% 25%, #4AF7B7 0%, #00F5A0 55%, #00B47A 100%)",
+              "radial-gradient(circle at 30% 25%, #4AF7B7 0%, var(--jh-primary) 55%, #00B47A 100%)",
             boxShadow:
               "0 20px 50px rgba(0,245,160,0.55), inset 0 -8px 16px rgba(0,0,0,0.18)",
           }}
         >
           <Check size={48} color="#0A0A0B" strokeWidth={3.4} />
         </div>
-        <div className="mt-7 text-[14px] text-[#A3A3AC] font-medium jh-fade-in">
+        <div className="mt-7 text-[14px] text-[color:var(--jh-text-2)] font-medium jh-fade-in">
           Payment received
         </div>
         <div
-          className="mt-1 jh-num font-bold text-white jh-fade-in"
+          className="mt-1 jh-num font-bold text-[color:var(--jh-text)] jh-fade-in"
           style={{ fontSize: "48px" }}
         >
           ${amount.toFixed(2)}
         </div>
-        <div className="mt-2 text-[12px] text-[#6E6E78] jh-num" data-testid="tx-id">
+        <div className="mt-2 text-[12px] text-[color:var(--jh-text-3)] jh-num" data-testid="tx-id">
           Transaction · {txId}
         </div>
       </div>
@@ -95,9 +95,9 @@ export default function SuccessPage() {
           data-testid="share-receipt-btn"
           className="w-full h-[54px] rounded-[20px] font-semibold text-[15px] inline-flex items-center justify-center gap-2 jh-press"
           style={{
-            background: "#16161A",
-            color: "#FAFAFA",
-            border: "1px solid rgba(255,255,255,0.08)",
+            background: "var(--jh-surface)",
+            color: "var(--jh-text)",
+            border: "1px solid var(--jh-border-soft)",
           }}
         >
           <Share2 size={16} /> Share receipt
@@ -107,7 +107,7 @@ export default function SuccessPage() {
           onClick={() => navigate("/")}
           className="w-full h-[58px] rounded-[20px] font-semibold text-[16px] jh-press inline-flex items-center justify-center gap-2"
           style={{
-            background: "linear-gradient(180deg, #00F5A0 0%, #00D78A 100%)",
+            background: "linear-gradient(180deg, var(--jh-primary) 0%, var(--jh-primary-strong) 100%)",
             color: "#0A0A0B",
             boxShadow: "0 10px 28px rgba(0,245,160,0.45)",
           }}

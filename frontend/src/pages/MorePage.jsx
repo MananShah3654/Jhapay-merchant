@@ -70,12 +70,12 @@ function Tile({ item }) {
       onClick={onClick}
       className="rounded-[18px] flex flex-col items-center gap-2 py-4 jh-press"
       style={{
-        background: "#16161A",
-        border: "1px solid rgba(255,255,255,0.06)",
+        background: "var(--jh-surface)",
+        border: "1px solid var(--jh-border-soft)",
       }}
     >
       <Icon size={26} color={item.color} strokeWidth={1.8} />
-      <span className="text-[11px] font-semibold text-white tracking-tight text-center px-2 leading-tight">
+      <span className="text-[11px] font-semibold text-[color:var(--jh-text)] tracking-tight text-center px-2 leading-tight">
         {item.label}
       </span>
     </button>
@@ -87,8 +87,8 @@ export default function MorePage() {
     <div className="pb-32" data-testid="more-page">
       <TopBar />
       <div className="px-5 mt-3">
-        <div className="text-[26px] font-bold tracking-tight text-white">More</div>
-        <div className="text-[12px] text-[#A3A3AC] mt-0.5">{merchant.business}</div>
+        <div className="text-[26px] font-bold tracking-tight text-[color:var(--jh-text)]">More</div>
+        <div className="text-[12px] text-[color:var(--jh-text-2)] mt-0.5">{merchant.business}</div>
 
         {/* Front counter card */}
         <Card className="mt-4 p-3 flex items-center gap-3" testid="profile-card">
@@ -99,12 +99,12 @@ export default function MorePage() {
             style={{ border: "2px solid rgba(0,245,160,0.35)" }}
           />
           <div className="flex-1 min-w-0">
-            <div className="text-[14px] font-semibold text-white tracking-tight">
+            <div className="text-[14px] font-semibold text-[color:var(--jh-text)] tracking-tight">
               Front Counter
             </div>
-            <div className="text-[11px] text-[#A3A3AC]">Standard Mode</div>
+            <div className="text-[11px] text-[color:var(--jh-text-2)]">Standard Mode</div>
           </div>
-          <ChevronRight size={16} color="#6E6E78" />
+          <ChevronRight size={16} color="var(--jh-text-3)" />
         </Card>
 
         {/* Sign out (red row) */}
@@ -116,14 +116,14 @@ export default function MorePage() {
             border: "1px solid rgba(239, 68, 68, 0.25)",
           }}
         >
-          <LogOut size={15} className="text-[#EF4444]" strokeWidth={2.2} />
-          <span className="text-[13px] font-semibold text-[#EF4444]">Sign Out</span>
+          <LogOut size={15} className="text-[color:var(--jh-danger)]" strokeWidth={2.2} />
+          <span className="text-[13px] font-semibold text-[color:var(--jh-danger)]">Sign Out</span>
         </button>
 
         {/* Sections */}
         {moreSections.map((sec) => (
           <div key={sec.title} className="mt-5">
-            <div className="px-1 mb-2 text-[11px] font-semibold text-[#6E6E78] uppercase tracking-wider">
+            <div className="px-1 mb-2 text-[11px] font-semibold text-[color:var(--jh-text-3)] uppercase tracking-wider">
               {sec.title}
             </div>
             <div className="grid grid-cols-4 gap-2" data-testid={`group-${sec.title.toLowerCase().split(" ")[0]}`}>
@@ -134,7 +134,7 @@ export default function MorePage() {
           </div>
         ))}
 
-        <div className="text-center text-[10px] text-[#6E6E78] mt-6">
+        <div className="text-center text-[10px] text-[color:var(--jh-text-3)] mt-6">
           JhaPay · v1.0.0
         </div>
       </div>

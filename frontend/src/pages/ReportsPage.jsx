@@ -38,7 +38,7 @@ function Bars({ data, labels }) {
               x={x + barW / 2}
               y={H + 14}
               fontSize="9"
-              fill="#6E6E78"
+              fill="var(--jh-text-3)"
               textAnchor="middle"
             >
               {labels[i]}
@@ -68,7 +68,7 @@ function Donut({ slices, total }) {
   let offset = 0;
   return (
     <svg width="120" height="120" viewBox="0 0 120 120">
-      <circle cx="60" cy="60" r={r} fill="none" stroke="#1F1F24" strokeWidth="14" />
+      <circle cx="60" cy="60" r={r} fill="none" stroke="var(--jh-surface-2)" strokeWidth="14" />
       {slices.map((s, i) => {
         const len = (s.value / total) * c;
         const el = (
@@ -89,14 +89,14 @@ function Donut({ slices, total }) {
         offset += len;
         return el;
       })}
-      <text x="60" y="58" fontSize="10" fill="#A3A3AC" textAnchor="middle">
+      <text x="60" y="58" fontSize="10" fill="var(--jh-text-2)" textAnchor="middle">
         Total
       </text>
       <text
         x="60"
         y="74"
         fontSize="14"
-        fill="#FAFAFA"
+        fill="var(--jh-text)"
         textAnchor="middle"
         fontWeight="700"
       >
@@ -123,10 +123,10 @@ export default function ReportsPage() {
           <button
             data-testid="export-btn"
             className="grid place-items-center w-10 h-10 rounded-full jh-press"
-            style={{ background: "#16161A", border: "1px solid rgba(255,255,255,0.06)" }}
+            style={{ background: "var(--jh-surface)", border: "1px solid var(--jh-border-soft)" }}
             aria-label="Export"
           >
-            <Download size={16} color="#FAFAFA" />
+            <Download size={16} color="var(--jh-text)" />
           </button>
         }
       />
@@ -135,7 +135,7 @@ export default function ReportsPage() {
         {/* Range selector */}
         <div
           className="grid grid-cols-4 gap-1 p-1 rounded-[16px]"
-          style={{ background: "#16161A", border: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ background: "var(--jh-surface)", border: "1px solid var(--jh-border-soft)" }}
         >
           {RANGES.map((r) => {
             const active = range === r;
@@ -148,10 +148,10 @@ export default function ReportsPage() {
                 style={
                   active
                     ? {
-                        background: "linear-gradient(180deg, #00F5A0 0%, #00D78A 100%)",
+                        background: "linear-gradient(180deg, var(--jh-primary) 0%, var(--jh-primary-strong) 100%)",
                         color: "#0A0A0B",
                       }
-                    : { color: "#A3A3AC", background: "transparent" }
+                    : { color: "var(--jh-text-2)", background: "transparent" }
                 }
               >
                 {r}
@@ -164,11 +164,11 @@ export default function ReportsPage() {
         <Card className="mt-3 p-4" testid="revenue-card">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-[11px] text-[#A3A3AC] font-medium">Revenue · {range}</div>
-              <div className="jh-num text-[28px] font-bold text-white mt-0.5">
+              <div className="text-[11px] text-[color:var(--jh-text-2)] font-medium">Revenue · {range}</div>
+              <div className="jh-num text-[28px] font-bold text-[color:var(--jh-text)] mt-0.5">
                 {currency(kpis.revenue)}
               </div>
-              <div className="mt-1 inline-flex items-center gap-1 text-[11px] font-semibold text-[#00F5A0]">
+              <div className="mt-1 inline-flex items-center gap-1 text-[11px] font-semibold text-[color:var(--jh-primary)]">
                 <ArrowUpRight size={11} /> {kpis.revenueDelta}% vs prev
               </div>
             </div>
@@ -179,7 +179,7 @@ export default function ReportsPage() {
                 border: "1px solid rgba(0,245,160,0.25)",
               }}
             >
-              <TrendingUp size={16} color="#00F5A0" />
+              <TrendingUp size={16} color="var(--jh-primary)" />
             </div>
           </div>
           <div className="mt-3 -mx-1">
@@ -196,13 +196,13 @@ export default function ReportsPage() {
             { label: "Taxes", value: kpis.taxes, delta: 6.0, up: true, key: "taxes" },
           ].map((k) => (
             <Card key={k.key} className="p-3" testid={`kpi-${k.key}`}>
-              <div className="text-[11px] text-[#A3A3AC] font-medium">{k.label}</div>
-              <div className="jh-num text-[18px] font-bold text-white mt-1">
+              <div className="text-[11px] text-[color:var(--jh-text-2)] font-medium">{k.label}</div>
+              <div className="jh-num text-[18px] font-bold text-[color:var(--jh-text)] mt-1">
                 {currency(k.value)}
               </div>
               <div
                 className="mt-1 inline-flex items-center gap-0.5 text-[10px] font-semibold"
-                style={{ color: k.up ? "#00F5A0" : "#F87171" }}
+                style={{ color: k.up ? "var(--jh-primary)" : "#F87171" }}
               >
                 {k.up ? <ArrowUpRight size={10} /> : <ArrowDownRight size={10} />}
                 {k.delta}%
@@ -213,8 +213,8 @@ export default function ReportsPage() {
 
         {/* Top sellers */}
         <div className="mt-4 flex items-center justify-between px-1">
-          <div className="text-[13px] font-semibold text-white">Top sellers</div>
-          <button className="text-[11px] font-semibold text-[#00F5A0]">View all</button>
+          <div className="text-[13px] font-semibold text-[color:var(--jh-text)]">Top sellers</div>
+          <button className="text-[11px] font-semibold text-[color:var(--jh-primary)]">View all</button>
         </div>
         <Card className="mt-2 overflow-hidden" testid="top-sellers">
           {topSellers.map((s, i, arr) => (
@@ -240,10 +240,10 @@ export default function ReportsPage() {
                 {i + 1}
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-[13px] font-semibold text-white truncate">{s.name}</div>
-                <div className="text-[11px] text-[#A3A3AC]">{s.units} sold</div>
+                <div className="text-[13px] font-semibold text-[color:var(--jh-text)] truncate">{s.name}</div>
+                <div className="text-[11px] text-[color:var(--jh-text-2)]">{s.units} sold</div>
               </div>
-              <div className="jh-num text-[13px] font-bold text-white">
+              <div className="jh-num text-[13px] font-bold text-[color:var(--jh-text)]">
                 {currency(s.revenue)}
               </div>
             </div>
@@ -252,7 +252,7 @@ export default function ReportsPage() {
 
         {/* Category donut */}
         <Card className="mt-3 p-4" testid="category-mix">
-          <div className="text-[13px] font-semibold text-white">Category mix</div>
+          <div className="text-[13px] font-semibold text-[color:var(--jh-text)]">Category mix</div>
           <div className="mt-3 flex items-center gap-4">
             <Donut slices={categoryMix} total={categoryTotal} />
             <div className="flex-1 flex flex-col gap-2">
@@ -266,8 +266,8 @@ export default function ReportsPage() {
                     className="w-2.5 h-2.5 rounded-full"
                     style={{ background: c.color }}
                   />
-                  <span className="flex-1 text-white">{c.label}</span>
-                  <span className="jh-num text-[#A3A3AC]">
+                  <span className="flex-1 text-[color:var(--jh-text)]">{c.label}</span>
+                  <span className="jh-num text-[color:var(--jh-text-2)]">
                     {Math.round((c.value / categoryTotal) * 100)}%
                   </span>
                 </div>

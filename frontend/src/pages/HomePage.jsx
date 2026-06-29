@@ -35,8 +35,8 @@ function Segmented({ value, onChange }) {
     <div
       className="relative grid grid-cols-3 gap-1 p-1 rounded-[18px]"
       style={{
-        background: "rgba(22, 22, 26, 0.85)",
-        border: "1px solid rgba(255,255,255,0.06)",
+        background: "var(--jh-surface-2)",
+        border: "1px solid var(--jh-border-soft)",
       }}
       data-testid="segmented-control"
     >
@@ -47,7 +47,7 @@ function Segmented({ value, onChange }) {
         style={{
           width: "calc(33.333% - 5px)",
           left: `calc(${activeIdx} * 33.333% + 4px)`,
-          background: "linear-gradient(180deg, #00F5A0 0%, #00D78A 100%)",
+          background: "linear-gradient(180deg, var(--jh-primary) 0%, var(--jh-primary-strong) 100%)",
           boxShadow: "0 6px 18px rgba(0,245,160,0.35)",
           transition: "left 320ms cubic-bezier(0.22, 1, 0.36, 1)",
         }}
@@ -62,10 +62,10 @@ function Segmented({ value, onChange }) {
             onClick={() => onChange(it.id)}
             className="relative h-11 rounded-[14px] flex items-center justify-center gap-1.5 jh-press z-[1]"
           >
-            <Icon size={14} color={active ? "#0A0A0B" : "#A3A3AC"} strokeWidth={2.2} />
+            <Icon size={14} color={active ? "#0A0A0B" : "var(--jh-icon)"} strokeWidth={2.2} />
             <span
               className={`text-[12px] font-semibold tracking-tight ${
-                active ? "text-[#0A0A0B]" : "text-[#A3A3AC]"
+                active ? "text-[#0A0A0B]" : "text-[color:var(--jh-text-2)]"
               }`}
             >
               {it.label}
@@ -94,7 +94,7 @@ function KeyInView({ cents, setCents }) {
           <div
             data-testid="amount-display"
             className={`jh-num font-bold leading-none ${
-              cents === 0 ? "text-[#3F3F46]" : "text-white"
+              cents === 0 ? "text-[#3F3F46]" : "text-[color:var(--jh-text)]"
             }`}
             style={{ fontSize: "54px" }}
           >
@@ -107,7 +107,7 @@ function KeyInView({ cents, setCents }) {
           style={{
             background: "rgba(0, 245, 160, 0.08)",
             border: "1px solid rgba(0, 245, 160, 0.25)",
-            color: "#00F5A0",
+            color: "var(--jh-primary)",
           }}
         >
           <Plus size={14} strokeWidth={2.4} />
@@ -121,12 +121,12 @@ function KeyInView({ cents, setCents }) {
             key={k}
             data-testid={`key-${k.toLowerCase()}`}
             onClick={() => press(k)}
-            className="jh-key h-[68px] rounded-[18px] flex items-center justify-center text-[26px] font-semibold text-white"
+            className="jh-key h-[68px] rounded-[18px] flex items-center justify-center text-[26px] font-semibold text-[color:var(--jh-text)]"
           >
             {k === "del" ? (
-              <Delete size={22} color="#00F5A0" strokeWidth={2} />
+              <Delete size={22} color="var(--jh-primary)" strokeWidth={2} />
             ) : k === "C" ? (
-              <span className="text-[22px] font-bold text-[#00F5A0]">C</span>
+              <span className="text-[22px] font-bold text-[color:var(--jh-primary)]">C</span>
             ) : (
               k
             )}
@@ -162,22 +162,22 @@ function CatalogView({ cart, setCart, query, setQuery }) {
     <div data-testid="catalog-view">
       <div
         className="flex items-center gap-2 px-3 py-2.5 rounded-[16px]"
-        style={{ background: "#16161A", border: "1px solid rgba(255,255,255,0.06)" }}
+        style={{ background: "var(--jh-surface)", border: "1px solid var(--jh-border-soft)" }}
       >
-        <Search size={16} color="#6E6E78" />
+        <Search size={16} color="var(--jh-text-3)" />
         <input
           data-testid="catalog-search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search products"
-          className="flex-1 outline-none text-[13px] bg-transparent placeholder:text-[#6E6E78] text-white"
+          className="flex-1 outline-none text-[13px] bg-transparent placeholder:text-[color:var(--jh-text-3)] text-[color:var(--jh-text)]"
         />
       </div>
 
       <div className="mt-3 grid grid-cols-[110px_1fr] gap-3">
         <div
           className="rounded-[18px] p-1.5"
-          style={{ background: "#16161A", border: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ background: "var(--jh-surface)", border: "1px solid var(--jh-border-soft)" }}
         >
           <div className="flex flex-col gap-1 max-h-[320px] overflow-y-auto pr-1">
             {catalogCategories.map((c) => {
@@ -191,13 +191,13 @@ function CatalogView({ cart, setCart, query, setQuery }) {
                   className="flex items-center gap-2 px-2 py-2.5 rounded-[12px] jh-press text-left"
                   style={{
                     background: active ? "rgba(0,245,160,0.08)" : "transparent",
-                    boxShadow: active ? "inset 2px 0 0 #00F5A0" : "none",
+                    boxShadow: active ? "inset 2px 0 0 var(--jh-primary)" : "none",
                   }}
                 >
-                  <Icon size={14} color={active ? "#00F5A0" : "#A3A3AC"} strokeWidth={1.8} />
+                  <Icon size={14} color={active ? "var(--jh-primary)" : "var(--jh-icon)"} strokeWidth={1.8} />
                   <span
                     className={`text-[11px] font-semibold tracking-tight ${
-                      active ? "text-[#00F5A0]" : "text-[#A3A3AC]"
+                      active ? "text-[color:var(--jh-primary)]" : "text-[color:var(--jh-text-2)]"
                     }`}
                   >
                     {c.name}
@@ -210,7 +210,7 @@ function CatalogView({ cart, setCart, query, setQuery }) {
 
         <div
           className="rounded-[18px] overflow-hidden"
-          style={{ background: "#16161A", border: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ background: "var(--jh-surface)", border: "1px solid var(--jh-border-soft)" }}
         >
           <div className="max-h-[320px] overflow-y-auto">
             {items.map((p, i, arr) => (
@@ -226,12 +226,12 @@ function CatalogView({ cart, setCart, query, setQuery }) {
                   src={p.img}
                   alt={p.name}
                   className="w-10 h-10 rounded-[10px] object-cover"
-                  style={{ background: "#1F1F24" }}
+                  style={{ background: "var(--jh-surface-2)" }}
                   onError={(e) => (e.currentTarget.style.visibility = "hidden")}
                 />
                 <div className="flex-1 text-left min-w-0">
-                  <div className="text-[13px] font-semibold text-white truncate">{p.name}</div>
-                  <div className="text-[11px] text-[#A3A3AC] jh-num">${p.price.toFixed(2)}</div>
+                  <div className="text-[13px] font-semibold text-[color:var(--jh-text)] truncate">{p.name}</div>
+                  <div className="text-[11px] text-[color:var(--jh-text-2)] jh-num">${p.price.toFixed(2)}</div>
                 </div>
                 <span
                   className="grid place-items-center w-7 h-7 rounded-full"
@@ -240,12 +240,12 @@ function CatalogView({ cart, setCart, query, setQuery }) {
                     border: "1px solid rgba(0,245,160,0.25)",
                   }}
                 >
-                  <Plus size={14} color="#00F5A0" strokeWidth={2.6} />
+                  <Plus size={14} color="var(--jh-primary)" strokeWidth={2.6} />
                 </span>
               </button>
             ))}
             {items.length === 0 && (
-              <div className="py-8 text-center text-[12px] text-[#A3A3AC]">
+              <div className="py-8 text-center text-[12px] text-[color:var(--jh-text-2)]">
                 No products match.
               </div>
             )}
@@ -257,13 +257,13 @@ function CatalogView({ cart, setCart, query, setQuery }) {
         <div className="mt-3">
           <Card className="p-3" testid="cart-summary">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-[12px] text-[#A3A3AC] font-medium">
+              <div className="text-[12px] text-[color:var(--jh-text-2)] font-medium">
                 {cart.length} item{cart.length > 1 ? "s" : ""} in order
               </div>
               <button
                 data-testid="clear-cart"
                 onClick={() => setCart([])}
-                className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#EF4444] jh-press"
+                className="inline-flex items-center gap-1 text-[11px] font-semibold text-[color:var(--jh-danger)] jh-press"
               >
                 <Trash2 size={12} /> Clear
               </button>
@@ -273,7 +273,7 @@ function CatalogView({ cart, setCart, query, setQuery }) {
                 <span
                   key={`${p.id}-${i}`}
                   className="text-[11px] px-2.5 py-1 rounded-full"
-                  style={{ background: "#1F1F24", color: "#FAFAFA" }}
+                  style={{ background: "var(--jh-surface-2)", color: "var(--jh-text)" }}
                 >
                   {p.name}
                 </span>
@@ -296,12 +296,12 @@ function QuickListView() {
           border: "1px solid rgba(0,245,160,0.25)",
         }}
       >
-        <Star size={28} color="#00F5A0" strokeWidth={2} />
+        <Star size={28} color="var(--jh-primary)" strokeWidth={2} />
       </div>
-      <div className="text-[16px] font-semibold text-white tracking-tight">
+      <div className="text-[16px] font-semibold text-[color:var(--jh-text)] tracking-tight">
         No quick items yet
       </div>
-      <div className="text-[12px] text-[#A3A3AC] mt-1 px-8 leading-relaxed">
+      <div className="text-[12px] text-[color:var(--jh-text-2)] mt-1 px-8 leading-relaxed">
         Add your most used items here for faster checkout.
       </div>
 
@@ -319,7 +319,7 @@ function QuickListView() {
             className="aspect-square rounded-[14px]"
             style={{
               background: "rgba(255,255,255,0.02)",
-              border: "1px solid rgba(255,255,255,0.04)",
+              border: "1px solid var(--jh-border-soft)",
             }}
           >
             {i === 4 && (
@@ -331,16 +331,16 @@ function QuickListView() {
                     border: "1.5px solid rgba(0,245,160,0.45)",
                   }}
                 >
-                  <Plus size={18} color="#00F5A0" strokeWidth={2.6} />
+                  <Plus size={18} color="var(--jh-primary)" strokeWidth={2.6} />
                 </span>
               </div>
             )}
           </div>
         ))}
       </div>
-      <div className="text-[11px] text-[#6E6E78] mt-3 leading-relaxed">
+      <div className="text-[11px] text-[color:var(--jh-text-3)] mt-3 leading-relaxed">
         Tap and hold items from{" "}
-        <span style={{ color: "#00F5A0" }}>Catalog</span> to add them here.
+        <span style={{ color: "var(--jh-primary)" }}>Catalog</span> to add them here.
       </div>
     </div>
   );
@@ -358,7 +358,7 @@ function SwipeDots({ idx }) {
           style={{
             width: i === idx ? 18 : 5,
             height: 5,
-            background: i === idx ? "#00F5A0" : "rgba(255,255,255,0.18)",
+            background: i === idx ? "var(--jh-primary)" : "rgba(255,255,255,0.18)",
             boxShadow: i === idx ? "0 0 8px rgba(0,245,160,0.6)" : "none",
             transition: "width 280ms cubic-bezier(0.22, 1, 0.36, 1), background 280ms ease",
           }}
@@ -528,11 +528,11 @@ export default function HomePage() {
           className="w-full h-[58px] rounded-[22px] font-semibold text-[16px] jh-press inline-flex items-center justify-center gap-2 disabled:opacity-50"
           style={{
             background: canCharge
-              ? "linear-gradient(180deg, #00F5A0 0%, #00D78A 100%)"
-              : "#1F1F24",
-            color: canCharge ? "#0A0A0B" : "#6E6E78",
+              ? "linear-gradient(180deg, var(--jh-primary) 0%, var(--jh-primary-strong) 100%)"
+              : "var(--jh-surface-2)",
+            color: canCharge ? "#0A0A0B" : "var(--jh-text-3)",
             boxShadow: canCharge ? "0 10px 28px rgba(0,245,160,0.40)" : "none",
-            border: canCharge ? "none" : "1px solid rgba(255,255,255,0.06)",
+            border: canCharge ? "none" : "1px solid var(--jh-border-soft)",
           }}
         >
           <CreditCard size={18} strokeWidth={2.4} />

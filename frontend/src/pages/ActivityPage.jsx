@@ -51,11 +51,11 @@ function StatCard({ icon: Icon, label, value, delta, testid }) {
           border: "1px solid rgba(0,245,160,0.25)",
         }}
       >
-        <Icon size={14} color="#00F5A0" strokeWidth={2} />
+        <Icon size={14} color="var(--jh-primary)" strokeWidth={2} />
       </div>
-      <div className="text-[10px] text-[#A3A3AC] font-medium">{label}</div>
-      <div className="jh-num text-[18px] font-bold text-white mt-0.5">{value}</div>
-      <div className="mt-1.5 inline-flex items-center gap-0.5 text-[10px] font-semibold text-[#00F5A0]">
+      <div className="text-[10px] text-[color:var(--jh-text-2)] font-medium">{label}</div>
+      <div className="jh-num text-[18px] font-bold text-[color:var(--jh-text)] mt-0.5">{value}</div>
+      <div className="mt-1.5 inline-flex items-center gap-0.5 text-[10px] font-semibold text-[color:var(--jh-primary)]">
         <ArrowUp size={10} strokeWidth={2.6} /> {delta}% vs yesterday
       </div>
     </Card>
@@ -71,18 +71,18 @@ function TxRow({ t, open, onToggle }) {
       >
         <BrandLogo brand={t.brand} />
         <div className="flex-1 min-w-0 text-left">
-          <div className="text-[13px] font-semibold text-white">#{t.id}</div>
-          <div className="text-[11px] text-[#A3A3AC] truncate">
+          <div className="text-[13px] font-semibold text-[color:var(--jh-text)]">#{t.id}</div>
+          <div className="text-[11px] text-[color:var(--jh-text-2)] truncate">
             {t.method}{t.last4 !== "—" ? ` •••• ${t.last4}` : ""}
           </div>
-          <div className="text-[11px] text-[#6E6E78]">
+          <div className="text-[11px] text-[color:var(--jh-text-3)]">
             {t.time} · {t.customer}
           </div>
         </div>
         <div className="flex flex-col items-end gap-1">
           <div
             className={`jh-num text-[14px] font-semibold ${
-              t.status === "refunded" ? "text-[#60A5FA]" : "text-white"
+              t.status === "refunded" ? "text-[#60A5FA]" : "text-[color:var(--jh-text)]"
             }`}
           >
             {t.status === "refunded" ? "−" : ""}
@@ -92,21 +92,21 @@ function TxRow({ t, open, onToggle }) {
         </div>
         <ChevronRight
           size={14}
-          color="#6E6E78"
+          color="var(--jh-text-3)"
           className={`transition-transform ${open ? "rotate-90" : ""}`}
         />
       </button>
       {open && (
         <div className="px-4 pb-4 jh-fade-in">
-          <div className="rounded-[14px] p-3 text-[11px] text-[#A3A3AC]"
-            style={{ background: "#1F1F24", border: "1px solid rgba(255,255,255,0.04)" }}>
+          <div className="rounded-[14px] p-3 text-[11px] text-[color:var(--jh-text-2)]"
+            style={{ background: "var(--jh-surface-2)", border: "1px solid var(--jh-border-soft)" }}>
             <div className="flex justify-between py-1">
               <span>Receipt</span>
-              <span className="jh-num text-white font-medium">#{t.id}</span>
+              <span className="jh-num text-[color:var(--jh-text)] font-medium">#{t.id}</span>
             </div>
             <div className="flex justify-between py-1">
               <span>Payment</span>
-              <span className="text-white font-medium">
+              <span className="text-[color:var(--jh-text)] font-medium">
                 {t.method}{t.last4 !== "—" ? ` •• ${t.last4}` : ""}
               </span>
             </div>
@@ -119,7 +119,7 @@ function TxRow({ t, open, onToggle }) {
             <button
               data-testid={`tx-refund-${t.id}`}
               className="h-10 rounded-[14px] text-[12px] font-semibold inline-flex items-center justify-center gap-1 jh-press"
-              style={{ background: "#1F1F24", border: "1px solid rgba(255,255,255,0.08)", color: "#FAFAFA" }}
+              style={{ background: "var(--jh-surface-2)", border: "1px solid var(--jh-border-soft)", color: "var(--jh-text)" }}
             >
               <RotateCcw size={13} /> Refund
             </button>
@@ -156,19 +156,19 @@ export default function ActivityPage() {
     <div className="pb-32" data-testid="activity-page">
       <TopBar />
       <div className="px-5 mt-3">
-        <div className="text-[26px] font-bold tracking-tight text-white">Activity</div>
+        <div className="text-[26px] font-bold tracking-tight text-[color:var(--jh-text)]">Activity</div>
 
         <div className="mt-3 flex items-center gap-2 px-3 py-2.5 rounded-[16px]"
-          style={{ background: "#16161A", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <Search size={16} color="#6E6E78" />
+          style={{ background: "var(--jh-surface)", border: "1px solid var(--jh-border-soft)" }}>
+          <Search size={16} color="var(--jh-text-3)" />
           <input
             data-testid="activity-search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search receipt, card, customer or amount"
-            className="flex-1 outline-none text-[13px] bg-transparent placeholder:text-[#6E6E78] text-white"
+            className="flex-1 outline-none text-[13px] bg-transparent placeholder:text-[color:var(--jh-text-3)] text-[color:var(--jh-text)]"
           />
-          <SlidersHorizontal size={16} color="#A3A3AC" />
+          <SlidersHorizontal size={16} color="var(--jh-icon)" />
         </div>
 
         <div className="mt-3 flex gap-2 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
@@ -189,9 +189,9 @@ export default function ActivityPage() {
                         boxShadow: "0 6px 16px rgba(0,245,160,0.35)",
                       }
                     : {
-                        background: "#16161A",
-                        color: "#A3A3AC",
-                        border: "1px solid rgba(255,255,255,0.06)",
+                        background: "var(--jh-surface)",
+                        color: "var(--jh-text-2)",
+                        border: "1px solid var(--jh-border-soft)",
                       }
                 }
               >
@@ -208,10 +208,10 @@ export default function ActivityPage() {
         </div>
 
         <div className="mt-4 flex items-center justify-between px-1">
-          <div className="text-[13px] font-semibold text-white">
+          <div className="text-[13px] font-semibold text-[color:var(--jh-text)]">
             {filtered.length} Transactions
           </div>
-          <button className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#00F5A0]">
+          <button className="inline-flex items-center gap-1 text-[11px] font-semibold text-[color:var(--jh-primary)]">
             Newest First <ChevronDown size={12} />
           </button>
         </div>
@@ -227,7 +227,7 @@ export default function ActivityPage() {
             </div>
           ))}
           {filtered.length === 0 && (
-            <div className="text-center text-[13px] text-[#A3A3AC] py-10">No matches.</div>
+            <div className="text-center text-[13px] text-[color:var(--jh-text-2)] py-10">No matches.</div>
           )}
         </Card>
       </div>

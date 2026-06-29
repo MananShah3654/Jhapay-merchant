@@ -38,7 +38,7 @@ export default function BottomNav() {
                   active
                     ? {
                         background:
-                          "linear-gradient(180deg, #00F5A0 0%, #00D78A 100%)",
+                          "linear-gradient(180deg, var(--jh-primary) 0%, var(--jh-primary-strong) 100%)",
                         boxShadow: "0 8px 22px rgba(0,245,160,0.35)",
                       }
                     : {}
@@ -48,12 +48,12 @@ export default function BottomNav() {
                   <Icon
                     size={20}
                     strokeWidth={active ? 2.4 : 1.8}
-                    color={active ? "#0A0A0B" : "#A3A3AC"}
+                    color={active ? "#0A0A0B" : "var(--jh-icon)"}
                   />
                   {t.badge && !active && (
                     <span
                       data-testid={`${t.testid}-badge`}
-                      className="absolute -top-1.5 -right-2 min-w-[16px] h-[16px] px-1 rounded-full bg-[#EF4444] text-white text-[9px] font-bold grid place-items-center"
+                      className="absolute -top-1.5 -right-2 min-w-[16px] h-[16px] px-1 rounded-full bg-[var(--jh-danger)] text-white text-[9px] font-bold grid place-items-center"
                     >
                       {t.badge}
                     </span>
@@ -61,7 +61,7 @@ export default function BottomNav() {
                 </div>
                 <span
                   className={`text-[10px] mt-0.5 font-semibold tracking-tight ${
-                    active ? "text-[#0A0A0B]" : "text-[#A3A3AC]"
+                    active ? "text-[#0A0A0B]" : "text-[color:var(--jh-text-2)]"
                   }`}
                 >
                   {t.label}

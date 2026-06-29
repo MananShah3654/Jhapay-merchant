@@ -23,8 +23,8 @@ export default function AlertsPage() {
       <div className="px-5 mt-3">
         <div className="flex items-end justify-between">
           <div>
-            <div className="text-[26px] font-bold tracking-tight text-white">Alerts</div>
-            <div className="text-[12px] text-[#A3A3AC] mt-0.5">
+            <div className="text-[26px] font-bold tracking-tight text-[color:var(--jh-text)]">Alerts</div>
+            <div className="text-[12px] text-[color:var(--jh-text-2)] mt-0.5">
               {unreadCount} unread · {items.length} total
             </div>
           </div>
@@ -36,7 +36,7 @@ export default function AlertsPage() {
               style={{
                 background: "rgba(0,245,160,0.08)",
                 border: "1px solid rgba(0,245,160,0.20)",
-                color: "#00F5A0",
+                color: "var(--jh-primary)",
               }}
             >
               <MailCheck size={13} /> Mark all read
@@ -66,18 +66,18 @@ export default function AlertsPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
-                      <div className="text-[13px] font-semibold text-white">{a.title}</div>
+                      <div className="text-[13px] font-semibold text-[color:var(--jh-text)]">{a.title}</div>
                       {a.unread && (
                         <span
                           className="mt-1 w-2 h-2 rounded-full shrink-0"
-                          style={{ background: "#00F5A0", boxShadow: "0 0 8px #00F5A0" }}
+                          style={{ background: "var(--jh-primary)", boxShadow: "0 0 8px #00F5A0" }}
                         />
                       )}
                     </div>
-                    <div className="text-[12px] text-[#A3A3AC] mt-1 leading-relaxed">
+                    <div className="text-[12px] text-[color:var(--jh-text-2)] mt-1 leading-relaxed">
                       {a.body}
                     </div>
-                    <div className="text-[10px] text-[#6E6E78] mt-2">{a.time}</div>
+                    <div className="text-[10px] text-[color:var(--jh-text-3)] mt-2">{a.time}</div>
                   </div>
                 </div>
               </Card>
@@ -87,8 +87,8 @@ export default function AlertsPage() {
 
         {items.length === 0 && (
           <div className="text-center py-14">
-            <Bell size={28} color="#6E6E78" className="mx-auto mb-2" />
-            <div className="text-[13px] text-[#A3A3AC]">No alerts. You're all caught up.</div>
+            <Bell size={28} color="var(--jh-text-3)" className="mx-auto mb-2" />
+            <div className="text-[13px] text-[color:var(--jh-text-2)]">No alerts. You're all caught up.</div>
           </div>
         )}
       </div>

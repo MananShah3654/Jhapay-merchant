@@ -32,16 +32,16 @@ export default function PayoutsPage() {
             testid="next-payout"
             style={{
               background:
-                "radial-gradient(800px 200px at -10% -10%, rgba(0,245,160,0.18) 0%, transparent 60%), #16161A",
+                "radial-gradient(800px 200px at -10% -10%, rgba(0,245,160,0.18) 0%, transparent 60%), var(--jh-surface)",
             }}
           >
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-[11px] text-[#A3A3AC] font-medium">Next payout</div>
-                <div className="jh-num text-[36px] font-bold text-white mt-1 leading-none">
+                <div className="text-[11px] text-[color:var(--jh-text-2)] font-medium">Next payout</div>
+                <div className="jh-num text-[36px] font-bold text-[color:var(--jh-text)] mt-1 leading-none">
                   {currency(nextPayout.amount)}
                 </div>
-                <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] text-[#00F5A0] font-semibold">
+                <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] text-[color:var(--jh-primary)] font-semibold">
                   <Calendar size={11} /> {nextPayout.date}
                 </div>
               </div>
@@ -52,18 +52,18 @@ export default function PayoutsPage() {
                   border: "1px solid rgba(0,245,160,0.25)",
                 }}
               >
-                <Landmark size={22} color="#00F5A0" strokeWidth={1.8} />
+                <Landmark size={22} color="var(--jh-primary)" strokeWidth={1.8} />
               </div>
             </div>
             <div className="mt-4 pt-3 jh-hairline flex items-center justify-between">
-              <div className="text-[11px] text-[#A3A3AC]">
+              <div className="text-[11px] text-[color:var(--jh-text-2)]">
                 Destination · {nextPayout.bank}
               </div>
               <button
                 data-testid="instant-payout"
                 className="px-3 py-1.5 rounded-full text-[11px] font-bold jh-press"
                 style={{
-                  background: "linear-gradient(180deg, #00F5A0 0%, #00D78A 100%)",
+                  background: "linear-gradient(180deg, var(--jh-primary) 0%, var(--jh-primary-strong) 100%)",
                   color: "#0A0A0B",
                   boxShadow: "0 6px 16px rgba(0,245,160,0.35)",
                 }}
@@ -77,23 +77,23 @@ export default function PayoutsPage() {
         {/* Schedule + Month total */}
         <div className="mt-3 grid grid-cols-2 gap-2.5">
           <Card className="p-3" testid="schedule-card">
-            <div className="text-[11px] text-[#A3A3AC] font-medium">Schedule</div>
-            <div className="text-[14px] font-semibold text-white mt-1">
+            <div className="text-[11px] text-[color:var(--jh-text-2)] font-medium">Schedule</div>
+            <div className="text-[14px] font-semibold text-[color:var(--jh-text)] mt-1">
               {payoutSchedule.cadence}
             </div>
             <button
               data-testid="change-schedule"
-              className="mt-2 text-[11px] font-semibold text-[#00F5A0] inline-flex items-center gap-0.5"
+              className="mt-2 text-[11px] font-semibold text-[color:var(--jh-primary)] inline-flex items-center gap-0.5"
             >
               Change <ChevronRight size={11} />
             </button>
           </Card>
           <Card className="p-3" testid="month-card">
-            <div className="text-[11px] text-[#A3A3AC] font-medium">This month</div>
-            <div className="jh-num text-[20px] font-bold text-white mt-1">
+            <div className="text-[11px] text-[color:var(--jh-text-2)] font-medium">This month</div>
+            <div className="jh-num text-[20px] font-bold text-[color:var(--jh-text)] mt-1">
               {currency(monthTotal)}
             </div>
-            <div className="text-[10px] font-semibold text-[#00F5A0] mt-1 inline-flex items-center gap-0.5">
+            <div className="text-[10px] font-semibold text-[color:var(--jh-primary)] mt-1 inline-flex items-center gap-0.5">
               <ArrowUpRight size={10} /> 12.4%
             </div>
           </Card>
@@ -102,16 +102,16 @@ export default function PayoutsPage() {
         {/* Info banner */}
         <Card className="mt-3 p-3 flex items-start gap-2.5" testid="info-banner">
           <Info size={14} color="#60A5FA" className="mt-0.5 shrink-0" />
-          <div className="text-[11px] text-[#A3A3AC] leading-relaxed">
-            Standard payouts land in <span className="text-white font-semibold">1–2 business days</span>.
+          <div className="text-[11px] text-[color:var(--jh-text-2)] leading-relaxed">
+            Standard payouts land in <span className="text-[color:var(--jh-text)] font-semibold">1–2 business days</span>.
             Instant Payout deposits in seconds for a 1% fee.
           </div>
         </Card>
 
         {/* History */}
         <div className="mt-4 flex items-center justify-between px-1">
-          <div className="text-[13px] font-semibold text-white">Recent payouts</div>
-          <button className="text-[11px] font-semibold text-[#00F5A0]">All</button>
+          <div className="text-[13px] font-semibold text-[color:var(--jh-text)]">Recent payouts</div>
+          <button className="text-[11px] font-semibold text-[color:var(--jh-primary)]">All</button>
         </div>
         <Card className="mt-2 overflow-hidden" testid="payouts-list">
           {payouts.map((p, i, arr) => {
@@ -131,10 +131,10 @@ export default function PayoutsPage() {
                   <Landmark size={14} color={b.fg} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-[13px] font-semibold text-white">
+                  <div className="text-[13px] font-semibold text-[color:var(--jh-text)]">
                     {currency(p.amount)}
                   </div>
-                  <div className="text-[11px] text-[#A3A3AC] truncate">
+                  <div className="text-[11px] text-[color:var(--jh-text-2)] truncate">
                     {p.bank} · {p.txCount} tx
                   </div>
                 </div>
@@ -145,7 +145,7 @@ export default function PayoutsPage() {
                   >
                     {b.label}
                   </span>
-                  <span className="text-[10px] text-[#6E6E78]">{p.date}</span>
+                  <span className="text-[10px] text-[color:var(--jh-text-3)]">{p.date}</span>
                 </div>
               </div>
             );

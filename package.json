@@ -1,0 +1,12 @@
+{
+  "name": "jhapay-merchant",
+  "version": "1.0.0",
+  "private": true,
+  "description": "JhaPay merchant app — React frontend + Vercel serverless AI assistant",
+  "dependencies": {
+    "@anthropic-ai/sdk": ">=0.40.0 <1"
+  },
+  "devDependencies": {
+    "@vercel/node": "^3.0.0"
+  }
+}

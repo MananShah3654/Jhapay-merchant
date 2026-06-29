@@ -3,7 +3,7 @@ import { Sparkles, X, ArrowUp } from "lucide-react";
 import { promptSuggestions } from "@/data/mock";
 import axios from "axios";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "";
 const API = `${BACKEND_URL}/api`;
 
 function TypingDots() {
@@ -11,15 +11,15 @@ function TypingDots() {
     <span className="inline-flex gap-1 items-end h-4">
       <span
         className="w-1.5 h-1.5 rounded-full animate-bounce"
-        style={{ animationDelay: "0ms", background: "#A3A3AC" }}
+        style={{ animationDelay: "0ms", background: "var(--jh-text-2)" }}
       />
       <span
         className="w-1.5 h-1.5 rounded-full animate-bounce"
-        style={{ animationDelay: "120ms", background: "#A3A3AC" }}
+        style={{ animationDelay: "120ms", background: "var(--jh-text-2)" }}
       />
       <span
         className="w-1.5 h-1.5 rounded-full animate-bounce"
-        style={{ animationDelay: "240ms", background: "#A3A3AC" }}
+        style={{ animationDelay: "240ms", background: "var(--jh-text-2)" }}
       />
     </span>
   );
@@ -49,10 +49,20 @@ export default function AIAssistant() {
     if (!text || sending) return;
     setInput("");
     setSending(true);
+
+    // Build the conversation to send: prior turns (minus the canned greeting and
+    // any empty placeholders) plus this new user message. The serverless function
+    // is stateless, so the client carries the history.
+    const history = messages
+      .filter((mm) => mm.text)
+      .slice(1)
+      .map((mm) => ({ role: mm.role, content: mm.text }));
+    history.push({ role: "user", content: text });
+
     setMessages((m) => [...m, { role: "user", text }, { role: "assistant", text: "" }]);
     try {
       const res = await axios.post(`${API}/ai/chat`, {
-        message: text,
+        messages: history,
         session_id: sessionRef.current,
       });
       const reply = res.data?.reply || "Sorry, I couldn't reach the server.";
@@ -92,6 +102,7 @@ export default function AIAssistant() {
               "radial-gradient(circle at 30% 25%, #4AF7B7 0%, #00F5A0 55%, #00B47A 100%)",
           }}
         >
+          {/* icon stays dark — ink on the green orb (on-primary) */}
           <Sparkles size={22} color="#0A0A0B" strokeWidth={2.4} />
         </span>
       </button>
@@ -113,7 +124,7 @@ export default function AIAssistant() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="pt-3 pb-1 flex items-center justify-center">
-              <div className="w-10 h-1.5 rounded-full" style={{ background: "#3F3F46" }} />
+              <div className="w-10 h-1.5 rounded-full" style={{ background: "var(--jh-surface-3)" }} />
             </div>
 
             <div className="px-5 pb-2 flex items-center justify-between">
@@ -129,10 +140,10 @@ export default function AIAssistant() {
                   <Sparkles size={16} color="#0A0A0B" />
                 </span>
                 <div>
-                  <div className="text-[15px] font-semibold tracking-tight text-white">
+                  <div className="text-[15px] font-semibold tracking-tight text-[color:var(--jh-text)]">
                     JhaPay Assistant
                   </div>
-                  <div className="text-[11px] text-[#A3A3AC]">
+                  <div className="text-[11px] text-[color:var(--jh-text-2)]">
                     Powered by Claude Sonnet 4.5
                   </div>
                 </div>
@@ -141,9 +152,9 @@ export default function AIAssistant() {
                 data-testid="ai-close"
                 onClick={() => setOpen(false)}
                 className="grid place-items-center w-9 h-9 rounded-full jh-press"
-                style={{ background: "#1F1F24", border: "1px solid rgba(255,255,255,0.06)" }}
+                style={{ background: "var(--jh-surface-2)", border: "1px solid var(--jh-border-soft)" }}
               >
-                <X size={16} color="#A3A3AC" />
+                <X size={16} color="var(--jh-icon)" />
               </button>
             </div>
 
@@ -168,14 +179,14 @@ export default function AIAssistant() {
                         m.role === "user"
                           ? {
                               background:
-                                "linear-gradient(180deg, #00F5A0 0%, #00D78A 100%)",
+                                "linear-gradient(180deg, var(--jh-primary) 0%, var(--jh-primary-strong) 100%)",
                               color: "#0A0A0B",
                               boxShadow: "0 6px 18px rgba(0,245,160,0.30)",
                             }
                           : {
-                              background: "#1F1F24",
-                              color: "#FAFAFA",
-                              border: "1px solid rgba(255,255,255,0.06)",
+                              background: "var(--jh-surface-2)",
+                              color: "var(--jh-text)",
+                              border: "1px solid var(--jh-border-soft)",
                             }
                       }
                     >
@@ -196,9 +207,9 @@ export default function AIAssistant() {
                       onClick={() => send(p)}
                       className="shrink-0 px-3.5 py-2 rounded-full text-[12px] jh-press"
                       style={{
-                        background: "#1F1F24",
-                        color: "#FAFAFA",
-                        border: "1px solid rgba(255,255,255,0.08)",
+                        background: "var(--jh-surface-2)",
+                        color: "var(--jh-text)",
+                        border: "1px solid var(--jh-border-soft)",
                       }}
                     >
                       {p}
@@ -216,8 +227,8 @@ export default function AIAssistant() {
                 }}
                 className="flex items-center gap-2 rounded-[22px] px-4 py-2.5"
                 style={{
-                  background: "#1F1F24",
-                  border: "1px solid rgba(255,255,255,0.08)",
+                  background: "var(--jh-surface-2)",
+                  border: "1px solid var(--jh-border-soft)",
                 }}
               >
                 <input
@@ -225,7 +236,7 @@ export default function AIAssistant() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask anything about your business…"
-                  className="flex-1 outline-none text-[14px] bg-transparent placeholder:text-[#6E6E78] text-white"
+                  className="flex-1 outline-none text-[14px] bg-transparent placeholder:text-[color:var(--jh-text-3)] text-[color:var(--jh-text)]"
                 />
                 <button
                   data-testid="ai-send"
@@ -239,6 +250,7 @@ export default function AIAssistant() {
                   }}
                   aria-label="Send"
                 >
+                  {/* icon stays dark — ink on the green button (on-primary) */}
                   <ArrowUp size={16} color="#0A0A0B" strokeWidth={2.6} />
                 </button>
               </form>

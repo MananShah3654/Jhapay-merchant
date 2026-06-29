@@ -23,8 +23,8 @@ export default function DevicesPage() {
       <div className="px-5 mt-3">
         <div className="flex items-center justify-between">
           <div>
-            <div className="text-[26px] font-bold tracking-tight text-white">Devices</div>
-            <div className="text-[12px] text-[#A3A3AC] mt-0.5">2 active · 1 offline</div>
+            <div className="text-[26px] font-bold tracking-tight text-[color:var(--jh-text)]">Devices</div>
+            <div className="text-[12px] text-[color:var(--jh-text-2)] mt-0.5">2 active · 1 offline</div>
           </div>
           <button
             data-testid="add-device-btn"
@@ -55,19 +55,19 @@ export default function DevicesPage() {
                       border: "1px solid rgba(0,245,160,0.20)",
                     }}
                   >
-                    <Icon size={18} color="#00F5A0" strokeWidth={1.8} />
+                    <Icon size={18} color="var(--jh-primary)" strokeWidth={1.8} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <div className="text-[14px] font-semibold text-white truncate">
+                      <div className="text-[14px] font-semibold text-[color:var(--jh-text)] truncate">
                         {d.name}
                       </div>
                       <button className="grid place-items-center w-7 h-7 rounded-full jh-press">
-                        <MoreVertical size={14} color="#6E6E78" />
+                        <MoreVertical size={14} color="var(--jh-text-3)" />
                       </button>
                     </div>
-                    <div className="text-[11px] text-[#A3A3AC] mt-0.5">{d.model}</div>
-                    <div className="text-[10px] text-[#6E6E78] mt-0.5 jh-num">{d.serial}</div>
+                    <div className="text-[11px] text-[color:var(--jh-text-2)] mt-0.5">{d.model}</div>
+                    <div className="text-[10px] text-[color:var(--jh-text-3)] mt-0.5 jh-num">{d.serial}</div>
 
                     <div className="mt-3 flex items-center gap-2 flex-wrap">
                       <span
@@ -76,10 +76,10 @@ export default function DevicesPage() {
                       >
                         ● {s.label}
                       </span>
-                      <span className="text-[10px] text-[#A3A3AC]">{d.last}</span>
+                      <span className="text-[10px] text-[color:var(--jh-text-2)]">{d.last}</span>
                       {d.battery !== null && (
-                        <span className="inline-flex items-center gap-1 text-[10px] text-[#A3A3AC]">
-                          <BatIcon size={12} color={d.battery < 30 ? "#EF4444" : "#A3A3AC"} />
+                        <span className="inline-flex items-center gap-1 text-[10px] text-[color:var(--jh-text-2)]">
+                          <BatIcon size={12} color={d.battery < 30 ? "var(--jh-danger)" : "var(--jh-icon)"} />
                           {d.battery}%
                         </span>
                       )}
@@ -92,7 +92,7 @@ export default function DevicesPage() {
                         style={{
                           background: "rgba(245,158,11,0.10)",
                           border: "1px solid rgba(245,158,11,0.30)",
-                          color: "#F59E0B",
+                          color: "var(--jh-warning)",
                         }}
                       >
                         <RefreshCw size={13} strokeWidth={2.4} />

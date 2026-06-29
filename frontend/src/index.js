@@ -3,6 +3,10 @@ import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "@/index.css";
 import App from "@/App";
+import { initTheme } from "@/lib/theme";
+
+// Apply the saved theme before first paint (dark by default).
+initTheme();
 
 const queryClient = new QueryClient({
   defaultOptions: {
